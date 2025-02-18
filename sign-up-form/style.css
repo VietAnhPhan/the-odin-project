@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'Norse';
+    src: url('resources/fonts/Norse-Bold.woff2') format('woff2'),
+        url('resources/fonts/Norse-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+*,
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+em {
+    font-size: inherit;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.logo-background {
+    background-image: url(resources/images/halie-west-25xggax4bSA-unsplash.jpg);
+    height: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    flex: 1;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0 0 0 / 0.5);
+    margin-top: 150px;
+    padding: 1rem 0;
+}
+
+.logo>img {
+    max-width: 100px;
+}
+
+.logo>span {
+    font: clamp(5.5rem, 2.5vw, 6rem) "Norse";
+    color: white;
+}
+
+.credit {
+    color: white;
+    bottom: 1rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.credit span {
+    font-size: 0.75rem;
+}
+
+.credit a:link {
+    color: white;
+    font-size: inherit;
+}
+
+.form-create-account {
+    background-color: #eee;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+}
+
+.descriptive-form {
+    font-weight: 600;
+    font-size: 1.3rem;
+    box-sizing: border-box;
+    width: 70%;
+}
+
+.descriptive-form p {
+    font-size: inherit;
+}
+
+label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem
+}
+
+.input-row {
+    display: flex;
+    gap: 4rem;
+}
+
+input {
+    /* min-width: 200px; */
+    border-radius: 5px;
+    border: 1px solid #E5E7EB;
+    border-width: thin;
+    height: 1.5rem;
+    /* margin-top: 1rem; */
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
+    outline: 1px solid blue;
+    box-shadow: 3px 3px 5px #bbb;
+}
+
+form {
+    /* padding: 1.2rem; */
+    margin-top: 3rem;
+}
+
+
+.descriptive-form,
+.login {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.input-form-outter {
+    background-color: white;
+    padding: 2rem 3rem;
+    box-shadow: 0 3px 5px #bbb;
+}
+
+.input-form-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
+
+button {
+    background-color: #596D48;
+    color: white;
+    padding: 0.7rem 2rem;
+    border-radius: 7px;
+    border: none;
+    margin-top: 1.7rem;
+}
+
+input[type="password"]:invalid {
+    outline: 1px solid red;
+}
+
+.login {
+    margin-top: 1.5rem;
+    display: block;
+}
+
+button {
+    margin-left: 3rem;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #73905a;
+}
