@@ -1,0 +1,90 @@
+html,body{
+    font-family: Roboto;
+}
+
+.container{
+    display: flex;
+    background: #f1f1f1;
+    gap: 2rem;
+    padding: 1rem 1rem;
+}
+
+.new-book{
+    flex:1;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    background: #f1f1f1;
+
+    gap: 1rem;
+}
+
+.library{
+    flex:2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.form-input{
+    display: flex;
+}
+label{
+    /* flex: 3; */
+    flex-basis: 30%;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+input{
+    /* flex:4; */
+    flex-basis: 70%;
+}
+
+button{
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    background-color: cadetblue;
+    color: white;
+    cursor: pointer;
+}
+
+.remove{
+    background-color: sandybrown;
+}
+
+.toggle{
+    background-color: #333;
+    margin-top: 0.5rem;
+}
+button:hover{
+    background-color: #333;
+}
+
+input[type="checkbox"]{
+ cursor: pointer;
+}
+
+.book{
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: white;
+
+}
+
+input[type="text"], input[type="number"]{
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"]{
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.form-input:last-of-type > input{
+max-width: fit-content;
+}
