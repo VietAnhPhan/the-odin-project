@@ -1,0 +1,59 @@
+html,body{
+    font-family: sans-serif;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.board{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+
+}
+
+.cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border: 3px solid grey;
+    background: lightyellow;
+    cursor: pointer;
+}
+
+
+
+.cell:first-child, .cell:nth-child(2), .cell:nth-child(3){
+    border-top: none;
+}
+
+.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9){
+    border-right: none;
+}
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9){
+    border-bottom: none;
+}
+
+.cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7){
+    border-left: none;
+}
+
+.flex{
+    display: flex;
+    gap: 10px;
+}
+
+p{
+    padding: 0.5rem;
+    border: 1px solid gray;
+}
+
+.reset{
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+}
