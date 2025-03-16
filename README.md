@@ -7,6 +7,12 @@ _TOP (The Odin Project) where I start learning to become full stack developer. T
 ### Admin Dashboard
 ![Admin Dashboard](https://github.com/user-attachments/assets/dec191a4-bec4-420d-8618-b59614a70cbf)
 
+### Library
+![image](https://github.com/user-attachments/assets/9b5439e7-51b9-461f-a380-eec0492a9458)
+
+### Tic Tac Toe
+![image](https://github.com/user-attachments/assets/b1603727-d85a-4331-8c0b-db109ba450db)
+
 ## Credits
 Photo by <a href="https://unsplash.com/@haliewestphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Halie West</a> on <a href="https://unsplash.com/photos/green-leaf-plant-in-close-up-photography-25xggax4bSA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 Cat Kitten Ball royalty-free stock illustration  
