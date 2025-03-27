@@ -26,7 +26,7 @@ export default function () {
 
 
     menuTiming.forEach(menuTiming => {
-        console.log(menuTiming);
+        // console.log(menuTiming);
         const menuBlock = document.createElement("div");
         const menuTimingHeading = document.createElement("h3");
         const menuList = document.createElement("ul");
