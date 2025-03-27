@@ -7,11 +7,16 @@ _TOP (The Odin Project) where I start learning to become full stack developer. T
 ### Admin Dashboard
 ![Admin Dashboard](https://github.com/user-attachments/assets/dec191a4-bec4-420d-8618-b59614a70cbf)
 
+## JavaScript Course (12 projects)
 ### Library
 ![image](https://github.com/user-attachments/assets/9b5439e7-51b9-461f-a380-eec0492a9458)
 
 ### Tic Tac Toe
 ![image](https://github.com/user-attachments/assets/b1603727-d85a-4331-8c0b-db109ba450db)
+
+### Restaurant Page
+![image](https://github.com/user-attachments/assets/8f8eecab-4532-4ecb-a78e-94826fabb129)
+
 
 ## Credits
 Photo by <a href="https://unsplash.com/@haliewestphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Halie West</a> on <a href="https://unsplash.com/photos/green-leaf-plant-in-close-up-photography-25xggax4bSA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
@@ -19,3 +24,4 @@ Cat Kitten Ball royalty-free stock illustration
 Superhero Mask Costume royalty-free vector graphic: https://pixabay.com/service/license-summary/  
 Winter Puns: https://jokeknock.com/winter-jokes/  
 medium-image-us-house-of-representatives: https://www.pngfind.com/mpng/TJxmJ_medium-image-us-house-of-representatives-2018-hd/  
+Sorae Sushi: https://www.soraesushi.com/
