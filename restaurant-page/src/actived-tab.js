@@ -21,6 +21,7 @@ export default function () {
 
     homeTab.addEventListener("click", () => {
         removeActive();
+        homeTab.classList.add("actived");
         content.textContent="";
         
         content.appendChild(homeContent);
@@ -35,6 +36,7 @@ export default function () {
 
     contactTab.addEventListener("click",()=>{
         removeActive();
+        contactTab.classList.add("actived");
         content.textContent="";
         content.appendChild(contactContent);
     });
