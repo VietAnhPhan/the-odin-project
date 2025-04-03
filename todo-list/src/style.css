@@ -1,0 +1,39 @@
+section{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+header{
+    background-color: #F4F5F7;
+    height: 100vh;
+    padding: 2rem 2rem;
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.button__action{
+    max-width: 25px;
+    cursor: pointer;
+}
+
+.todo__status_done{
+    text-decoration: line-through;
+}
+
+.project__list-item{
+    cursor: pointer;
+}
+
+button{
+    cursor: pointer;
+}
+
+.icon__add{
+    max-width: 35px;
+}
