@@ -9,7 +9,7 @@ export default class ToDoListUI {
         // this.projectName = project.title;
         this.project = project;
         this.projectTitle = document.querySelector(".project__title");
-        this.todoList = document.querySelector(".project__todo-list");
+        this.todoList = document.querySelector(".todo__list");
         this.addBtn = document.querySelector(".button__add");
         this.modalUI = new ModalUI();
 
@@ -58,7 +58,7 @@ export default class ToDoListUI {
         prorityStatus.classList.add("todo__priority");
 
         deleteBtn.classList.add("button__action");
-        li.classList.add("project__todo");
+        li.classList.add("todo", "flex", "gap-10", "align-center");
 
         deleteBtn.setAttribute("src", deleteButton);
 

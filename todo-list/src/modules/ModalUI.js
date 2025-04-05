@@ -14,6 +14,7 @@ export default class ModalUI {
         this.addBtn = document.createElement("button");
         this.closeModalBtn = document.createElement("button");
 
+
         // Add Todo Dialog
         this.todoDialog = document.createElement("dialog");
         this.todoModalTitle = document.createElement("h3");
@@ -29,10 +30,14 @@ export default class ModalUI {
         this.todoBtn = document.createElement("button");
         this.closeTodoModalBtn = document.createElement("button");
 
+
         this.initProjectModal();
         this.initTodoModal();
     }
+
+
     initProjectModal() {
+
         this.title.textContent = "Create new project";
         this.textbox.type = "text";
         this.textbox.placeholder = "Enter your project name";
@@ -42,6 +47,7 @@ export default class ModalUI {
         this.addBtn.addEventListener("click", this.addProject.bind(this));
 
         this.closeModalBtn.addEventListener("click", () => {
+            this.dialog.classList.remove("flex", "flex-column", "gap-10");
             this.dialog.close();
         })
 
@@ -53,14 +59,16 @@ export default class ModalUI {
     }
 
     initTodoModal() {
-
-
+        this.closeTodoModalBtn.classList.add("button__close");
+        
         this.closeTodoModalBtn.addEventListener("click", () => {
             this.todoForm.reset();
             this.todoDialog.close();
         })
 
-        this.todoForm.append(this.todoTitleLabel, this.todoTitle, this.todoDescriptionLabel, this.todoDescription, this.todoDueDateLabel, this.todoDueDate, this.isTodoPriorityLabel, this.isTodoPriority, this.todoBtn);
+        const priorityDiv = document.createElement("div");
+        priorityDiv.append(this.isTodoPriorityLabel, this.isTodoPriority);
+        this.todoForm.append(this.todoTitleLabel, this.todoTitle, this.todoDescriptionLabel, this.todoDescription, this.todoDueDateLabel, this.todoDueDate, priorityDiv, this.todoBtn);
 
         this.todoDialog.append(this.todoModalTitle, this.todoForm, this.closeTodoModalBtn);
 
@@ -69,7 +77,7 @@ export default class ModalUI {
     }
 
     openProjectModal() {
-
+        this.dialog.classList.add("flex", "flex-column", "gap-10");
         this.dialog.showModal();
 
         // form.addEventListener("submit", (event) => { this.handleSubmit });
@@ -77,6 +85,7 @@ export default class ModalUI {
     }
 
     openAddTodo(onAddProject) {
+        this.todoForm.classList.add("flex", "flex-column", "gap-10");
         this.todoModalTitle.textContent = "Create new Todo";
         this.todoTitleLabel.textContent = "Title";
         this.todoTitle.type = "text";
@@ -98,7 +107,7 @@ export default class ModalUI {
     openEditTodo(args) {
         // console.log(args);
         // console.log(format(todo.dueDate, 'yyyy-MM-dd'));
-
+        this.todoForm.classList.add("flex", "flex-column", "gap-10");
         this.todoModalTitle.textContent = "Edit Todo";
         this.todoTitleLabel.textContent = "Title";
         this.todoDescriptionLabel.textContent = "Description";
@@ -106,12 +115,12 @@ export default class ModalUI {
         this.isTodoPriorityLabel.textContent = "Is Priority?";
         this.todoBtn.textContent = "Save Todo";
         this.closeTodoModalBtn.textContent = "Close";
-       
+
         this.todoTitle.type = "text";
         this.todoDueDate.type = "date";
         this.isTodoPriority.type = "checkbox";
-        
-       
+
+
         this.todoTitle.value = args.todo.title;
         this.todoDescription.textContent = args.todo.description;
         this.todoDueDate.value = format(args.todo.dueDate, 'yyyy-MM-dd');
@@ -129,7 +138,7 @@ export default class ModalUI {
             args.el.querySelector(".todo__title").textContent = args.todo.title;
             args.el.querySelector(".todo__priority").src = args.todo.priority ? args.fill_star : args.hollow_star;
 
-           
+
             this.todoBtn.removeEventListener("click", handleTodoBtn);
             this.todoForm.reset();
             this.todoDialog.close();

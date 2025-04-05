@@ -9,25 +9,35 @@
 </head>
 
 <body>
-    <section>
+    <div class="main-layout">
         <header class="flex flex-column">
-            <span>home</span>
-            <span>today</span>
-            <span>important</span>
-            <div class="project">
-                <span class="project__heading">projects</span>
-                <ul class="project__list">
-
-                </ul>
-                <button class="project__add-btn">add project</button>
+            <div class="sidebar__content flex flex-column">
+                <span class="header__menu-item"><img class="icon" src="../assets/icons/home-button.png" alt=""> home</span>
+                <span class="header__menu-item"><img class="icon" src="../assets/icons/calendar.png" alt=""> today</span>
+                <span class="header__menu-item"><img class="icon" src="../assets/icons/star.png" alt=""> important</span>
+                <div class="project">
+                    <span class="project__heading">projects</span>
+                    <ul class="project__list">
+                    </ul>
+                </div>
+               
             </div>
+          
         </header>
+       <nav>  </nav>
         <main>
             <span class="project__title">home</span>
-            <ul class="project__todo-list"></ul>
-            <button class="button__add"><img class="icon__add" src="../assets/icons/add.svg" alt="add icon">Add Todo</button>
+            <ul class="todo__list"></ul>
+            
         </main>
-    </section>
+
+        <footer>
+            <div class="footer__inner">
+                <button class="project__add-btn nav__button-add text__captialize"><img class="icon" src="../assets/icons/add.svg" alt="">new project</button>
+                <button class="button__add nav__button-add text__captialize"><img class="icon" src="../assets/icons/add.svg" alt="add icon">Add Todo</button>
+            </div>
+        </footer>
+    </div >
 </body>
 
 </html>
