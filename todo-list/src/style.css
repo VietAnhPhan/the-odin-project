@@ -37,3 +37,12 @@ button{
 .icon__add{
     max-width: 35px;
 }
+
+.todo__priority{
+    max-width: 1.5rem;
+}
+
+.project__todo{
+    cursor: pointer;
+}
+

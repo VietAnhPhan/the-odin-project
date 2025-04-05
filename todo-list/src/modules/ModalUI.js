@@ -1,9 +1,11 @@
 import Project from "./project";
 import Todo from "./todo";
+import { format } from "date-fns";
+
 
 export default class ModalUI {
-    constructor(onAddProject = null) {
-        this.onAddProject = onAddProject;
+    constructor() {
+        // this.onAddProject = onAddProject;
 
         this.dialog = document.createElement("dialog");
         this.title = document.createElement("span");
@@ -12,6 +14,7 @@ export default class ModalUI {
         this.addBtn = document.createElement("button");
         this.closeModalBtn = document.createElement("button");
 
+        // Add Todo Dialog
         this.todoDialog = document.createElement("dialog");
         this.todoModalTitle = document.createElement("h3");
         this.todoForm = document.createElement("form");
@@ -23,7 +26,7 @@ export default class ModalUI {
         this.todoDescription = document.createElement("textarea");
         this.isTodoPriority = document.createElement("input");
         this.isTodoPriorityLabel = document.createElement("label");
-        this.addTodoBtn = document.createElement("button");
+        this.todoBtn = document.createElement("button");
         this.closeTodoModalBtn = document.createElement("button");
 
         this.initProjectModal();
@@ -50,35 +53,20 @@ export default class ModalUI {
     }
 
     initTodoModal() {
-        this.todoModalTitle.textContent = "Create new Todo";
-        this.todoTitleLabel.textContent = "Title";
-        this.todoTitle.type = "text";
-        this.todoDescriptionLabel.textContent = "Description";
-        this.todoDescription.placeholder = "Title";
-        this.todoDueDateLabel = "Due date";
-        this.todoDueDate.type = "date";
-        this.isTodoPriorityLabel = "Is Priority?";
-        this.isTodoPriority.type = "checkbox";
-        this.isTodoPriority.value = "yes";
-        this.addTodoBtn.textContent = "Create Todo";
-        this.closeTodoModalBtn.textContent = "Close";
 
-
-
-        this.addTodoBtn.addEventListener("click", this.addTodo.bind(this));
 
         this.closeTodoModalBtn.addEventListener("click", () => {
+            this.todoForm.reset();
             this.todoDialog.close();
         })
 
-        this.todoForm.append(this.todoTitleLabel, this.todoTitle, this.todoDescriptionLabel, this.todoDescription, this.todoDueDateLabel, this.todoDueDate, this.isTodoPriorityLabel, this.isTodoPriority, this.addTodoBtn);
+        this.todoForm.append(this.todoTitleLabel, this.todoTitle, this.todoDescriptionLabel, this.todoDescription, this.todoDueDateLabel, this.todoDueDate, this.isTodoPriorityLabel, this.isTodoPriority, this.todoBtn);
 
         this.todoDialog.append(this.todoModalTitle, this.todoForm, this.closeTodoModalBtn);
 
         document.body.appendChild(this.todoDialog);
 
     }
-
 
     openProjectModal() {
 
@@ -88,27 +76,69 @@ export default class ModalUI {
 
     }
 
-    openTodoModal() {
+    openAddTodo(onAddProject) {
+        this.todoModalTitle.textContent = "Create new Todo";
+        this.todoTitleLabel.textContent = "Title";
+        this.todoTitle.type = "text";
+        this.todoDescriptionLabel.textContent = "Description";
+        this.todoDescription.placeholder = "Title";
+        this.todoDueDateLabel.textContent = "Due date";
+        this.todoDueDate.type = "date";
+        this.isTodoPriorityLabel.textContent = "Is Priority?";
+        this.isTodoPriority.type = "checkbox";
+        this.isTodoPriority.value = "yes";
+        this.todoBtn.textContent = "Create Todo";
+        this.closeTodoModalBtn.textContent = "Close";
 
-        // this.title.textContent = "Create new Todo";
-        // this.textbox.type = "text";
-        // this.textbox.placeholder = "Title";
-        // this.addBtn.textContent = "Create";
-        // this.closeModalBtn.textContent = "Close";
-        // this.todoDescriptionLabel.textContent = "Description";
-
-        // this.addBtn.addEventListener("click", this.addProject.bind(this));
-
-        // this.closeModalBtn.addEventListener("click", () => {
-        //     this.dialog.close();
-        // })
-
-        // this.dialog.append(this.todoDescriptionLabel, this.description);
-
+        this.todoBtn.addEventListener("click", this.addTodo.bind(this, onAddProject));
 
         this.todoDialog.showModal();
     }
 
+    openEditTodo(args) {
+        // console.log(args);
+        // console.log(format(todo.dueDate, 'yyyy-MM-dd'));
+
+        this.todoModalTitle.textContent = "Edit Todo";
+        this.todoTitleLabel.textContent = "Title";
+        this.todoDescriptionLabel.textContent = "Description";
+        this.todoDueDateLabel.textContent = "Due date";
+        this.isTodoPriorityLabel.textContent = "Is Priority?";
+        this.todoBtn.textContent = "Save Todo";
+        this.closeTodoModalBtn.textContent = "Close";
+       
+        this.todoTitle.type = "text";
+        this.todoDueDate.type = "date";
+        this.isTodoPriority.type = "checkbox";
+        
+       
+        this.todoTitle.value = args.todo.title;
+        this.todoDescription.textContent = args.todo.description;
+        this.todoDueDate.value = format(args.todo.dueDate, 'yyyy-MM-dd');
+        this.isTodoPriority.checked = args.todo.priority;
+        // console.log(fillStarButton);
+
+        const handleTodoBtn = (event) => {
+            event.preventDefault();
+
+            args.todo.title = this.todoTitle.value;
+            args.todo.description = this.todoDescription.value;
+            args.todo.dueDate = this.todoDueDate.value;
+            args.todo.priority = this.isTodoPriority.checked;
+
+            args.el.querySelector(".todo__title").textContent = args.todo.title;
+            args.el.querySelector(".todo__priority").src = args.todo.priority ? args.fill_star : args.hollow_star;
+
+           
+            this.todoBtn.removeEventListener("click", handleTodoBtn);
+            this.todoForm.reset();
+            this.todoDialog.close();
+        }
+
+        this.todoBtn.addEventListener("click", handleTodoBtn);
+
+        this.todoDialog.showModal();
+    }
 
 
     addProject(event) {
@@ -121,7 +151,7 @@ export default class ModalUI {
         this.dialog.close();
     }
 
-    addTodo(event) {
+    addTodo(onAddProject, event) {
         event.preventDefault();
 
         const newTodo = new Todo(
@@ -132,7 +162,8 @@ export default class ModalUI {
 
         );
 
-        this.onAddProject(newTodo)
+        onAddProject(newTodo)
+
 
         this.todoDialog.close();
     }
