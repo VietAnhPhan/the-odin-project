@@ -1,9 +1,10 @@
 import fillStarButton from '../../assets/icons/star-fill.svg';
 import hollowStarButton from '../../assets/icons/star-hollow.svg';
 import deleteButton from '../../assets/icons/rubbish-bin.svg';
-import ModalUI from './ModalUI';
+import ModalDOM from './modalDOM';
+import { projectManager } from './projectManager';
 
-export default class ToDoListUI {
+class TodoListDOM {
 
     constructor(projects) {
         // this.projectName = project.title;
@@ -11,13 +12,13 @@ export default class ToDoListUI {
         // this.project = project;
         // this.projects = JSON.parse(localStorage.getItem("projects"));
         this.projects = projects;
-        this.projectTitle = document.querySelector(".project__title");
-        this.todoList = document.querySelector(".todo__list");
+        this.projectTitleSpan = document.querySelector(".project__title");
+        this.todoListUL = document.querySelector(".todo__list");
         this.addBtn = document.querySelector(".button__add");
-        this.modalUI = new ModalUI();
+        // this.modalUI = new ModalDOM();
 
         
-        this.display(this.projects[0]);
+        // this.display(this.projects[0]);
         this.attachEvent();
 
         // console.log(this.projects[0])
@@ -25,113 +26,116 @@ export default class ToDoListUI {
 
     attachEvent() {
         this.addBtn.addEventListener("click", () => {
-            this.modalUI.openAddTodo(this);
+            // this.modalUI.openAddTodo(this);
         });
     }
 
-    display(project) {
-        // console.log(project);
-        this.todoList.textContent = "";
-        // this.projectTitle.textContent = project.title;
+    render(project, projectIndex) {
+        console.log(project);
+        this.todoListUL.textContent = "";
+        this.projectTitleSpan.textContent = project.title;
 
-        // for (const todo of project.todos) {
-        //     const li = document.createElement("li");
-        //     const checkbox = document.createElement("input");
-        //     const title = document.createElement("span");
-        //     const prorityStatus = document.createElement("img");
-        //     const deleteBtn = document.createElement("img");
+        for (const todo of project.todos) {
+            const li = document.createElement("li");
+            const isCompletedcheckbox = document.createElement("input");
+            const todoTitleSpan = document.createElement("span");
+            const prorityStatusImg = document.createElement("img");
+            const deleteTodoBtn = document.createElement("img");
     
-        //     checkbox.type = "checkbox";
+            isCompletedcheckbox.type = "checkbox";
     
+            todoTitleSpan.textContent = todo.title;
+
+            li.classList.add("todo", "flex", "gap-10", "align-center");
+            todoTitleSpan.classList.add("todo__title");
+            isCompletedcheckbox.classList.add("todo__checkbox");
+            prorityStatusImg.classList.add("todo__priority");
     
+            deleteTodoBtn.classList.add("button__action");
+
+           
+            li.setAttribute('data-index', project.todos.indexOf(todo));
     
-        //     title.textContent = todo.title;
+            deleteTodoBtn.setAttribute("src", deleteButton);
     
-        //     title.classList.add("todo__title");
-        //     checkbox.classList.add("todo__checkbox");
-        //     prorityStatus.classList.add("todo__priority");
+            if (todo.completed) {
+                isCompletedcheckbox.checked = true;
+                todoTitleSpan.classList.add("todo__status_done");
+            }
     
-        //     deleteBtn.classList.add("button__action");
-        //     li.classList.add("todo", "flex", "gap-10", "align-center");
-        //     li.setAttribute('data-index', project.todos.indexOf(todo));
+            if (todo.priority) {
+                prorityStatusImg.setAttribute("src", fillStarButton);
     
-        //     deleteBtn.setAttribute("src", deleteButton);
+            } else {
+                prorityStatusImg.setAttribute("src", hollowStarButton);
+            }
     
-        //     if (todo.completed) {
-        //         checkbox.checked = true;
-        //         title.classList.add("todo__status_done");
-        //     }
+            
+            isCompletedcheckbox.addEventListener("click", (event) => {
+                event.stopPropagation();
+                if (!todoTitleSpan.classList.contains("todo__status_done")) {
     
-        //     if (todo.priority) {
-        //         prorityStatus.setAttribute("src", fillStarButton);
+                    todoTitleSpan.classList.add("todo__status_done");
+                    todo.completed = true;
+                 
     
-        //     } else {
-        //         prorityStatus.setAttribute("src", hollowStarButton);
-        //     }
+                } else {
     
-        //     checkbox.addEventListener("click", (event) => {
-        //         event.stopPropagation();
-        //         if (!title.classList.contains("todo__status_done")) {
+                    todoTitleSpan.classList.remove("todo__status_done");
+                    todo.completed = false;
     
-        //             title.classList.add("todo__status_done");
-        //             todo.completed = true;
-    
-        //         } else {
-    
-        //             title.classList.remove("todo__status_done");
-        //             todo.completed = false;
-    
-        //         }
-    
-        //     });
-    
-    
-        //     prorityStatus.addEventListener("click", (event) => {
-        //         event.stopPropagation();
-        //         if (prorityStatus.getAttribute("src") == fillStarButton) {
-        //             todo.priority = false;
-        //             prorityStatus.setAttribute("src", hollowStarButton);
-        //         }
-        //         else {
-        //             todo.priority = true;
-        //             prorityStatus.setAttribute("src", fillStarButton);
-        //         }
-        //     });
-    
-        //     li.addEventListener("click", (event) => {
-    
-        //         this.modalUI.openEditTodo({
-        //             todo: todo,
-        //             el: event.currentTarget,
-        //             hollow_star: hollowStarButton,
-        //             fill_star: fillStarButton
-        //         });
-    
-        //     });
+                }
+                console.log(li.getAttribute('data-index'))
+                projectManager.setCompleted(projectIndex, li.getAttribute('data-index'));
+            });
     
     
+            prorityStatusImg.addEventListener("click", (event) => {
+                event.stopPropagation();
+                if (prorityStatusImg.getAttribute("src") == fillStarButton) {
+                    todo.priority = false;
+                    prorityStatusImg.setAttribute("src", hollowStarButton);
+                }
+                else {
+                    todo.priority = true;
+                    prorityStatusImg.setAttribute("src", fillStarButton);
+                }
+            });
     
-        //     deleteBtn.addEventListener("click", (event) => {
-        //         event.stopPropagation();
-        //         const updatedProjectIndex=li.getAttribute('data-index');
-        //         this.project.todos.splice(this.project.todos.indexOf(todo), 1);
-        //         this.projects = this.projects.map((project,index)=>{
-        //             if(index == updatedProjectIndex){
-        //                 return {
-        //                     ...project,
-        //                     todos:  this.project.todos
-        //                 }
-        //             }
-        //         });
+            // li.addEventListener("click", (event) => {
     
-        //         localStorage.setItem("projects", JSON.stringify(this.projects));
-        //         li.remove();
-        //     });
+            //     this.modalUI.openEditTodo({
+            //         todo: todo,
+            //         el: event.currentTarget,
+            //         hollow_star: hollowStarButton,
+            //         fill_star: fillStarButton
+            //     });
     
-        //     li.append(checkbox, title, prorityStatus, deleteBtn);
+            // });
     
-        //     this.todoList.appendChild(li);
-        // }
+    
+    
+            deleteTodoBtn.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const updatedProjectIndex=li.getAttribute('data-index');
+                this.project.todos.splice(this.project.todos.indexOf(todo), 1);
+                this.projects = this.projects.map((project,index)=>{
+                    if(index == updatedProjectIndex){
+                        return {
+                            ...project,
+                            todos:  this.project.todos
+                        }
+                    }
+                });
+    
+                localStorage.setItem("projects", JSON.stringify(this.projects));
+                li.remove();
+            });
+    
+            li.append(isCompletedcheckbox, todoTitleSpan, prorityStatusImg, deleteTodoBtn);
+    
+            this.todoListUL.appendChild(li);
+        }
     }
 
 
@@ -253,8 +257,9 @@ export default class ToDoListUI {
 
         li.append(checkbox, title, prorityStatus, deleteBtn);
 
-        this.todoList.appendChild(li);
+        this.todoListUL.appendChild(li);
     }
 }
 
 
+export const todoListDOM = new TodoListDOM(); 

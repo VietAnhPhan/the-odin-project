@@ -1,19 +1,19 @@
 import Project from "./project";
 import Todo from "./todo";
 import { format } from "date-fns";
+import { projectListDOM } from "./projectListDOM";
 
-
-export default class ModalUI {
+class ModalDOM {
     constructor() {
         // this.onAddProject = onAddProject;
         this.projectListUI = null;
         this.todoListUI = null;
         
-        this.dialog = document.createElement("dialog");
-        this.title = document.createElement("span");
-        this.form = document.createElement("form");
-        this.projectTitle = document.createElement("input");
-        this.addBtn = document.createElement("button");
+        this.projectDialog = document.createElement("dialog");
+        this.projectTitleSpan = document.createElement("span");
+        this.addProjectForm = document.createElement("form");
+        this.projectTitleInput = document.createElement("input");
+        this.addProjectBtn = document.createElement("button");
         this.closeModalBtn = document.createElement("button");
 
 
@@ -58,37 +58,36 @@ export default class ModalUI {
 
     initProjectModal() {
 
-        this.title.textContent = "Create new project";
-        this.projectTitle.type = "text";
-        this.projectTitle.placeholder = "Enter your project name";
-        this.addBtn.textContent = "Create project";
-        this.addBtn.type = "button";
+        this.projectTitleSpan.textContent = "Create new project";
+        this.projectTitleInput.type = "text";
+        this.projectTitleInput.placeholder = "Enter your project name";
+        this.addProjectBtn.textContent = "Create project";
+        this.addProjectBtn.type = "button";
         this.closeModalBtn.textContent = "Close";
       
         this.closeModalBtn.addEventListener("click", () => {
            
-            this.dialog.classList.remove("flex", "flex-column", "gap-10");
-            this.dialog.close();
+            this.projectDialog.classList.remove("flex", "flex-column", "gap-10");
+            this.projectDialog.close();
         })
 
-        this.addBtn.addEventListener("click", (event) => {
+        this.addProjectBtn.addEventListener("click", (event) => {
             event.preventDefault();
 
-            const newProject = new Project(this.projectTitle.value);
+            const newProject = new Project(this.projectTitleInput.value);
         
-            this.projectListUI.add(newProject);
+            projectListDOM.addProject(newProject);
 
-            console.log(this.projectListUI.projects);
-            this.dialog.classList.remove("flex", "flex-column", "gap-10");
-            this.form.reset();
-            this.dialog.close();
+            this.projectDialog.classList.remove("flex", "flex-column", "gap-10");
+            this.addProjectForm.reset();
+            this.projectDialog.close();
     
         });
 
-        this.form.append(this.projectTitle, this.addBtn);
-        this.dialog.append(this.title, this.form, this.closeModalBtn);
+        this.addProjectForm.append(this.projectTitleInput, this.addProjectBtn);
+        this.projectDialog.append(this.projectTitleSpan, this.addProjectForm, this.closeModalBtn);
 
-        document.body.appendChild(this.dialog);
+        document.body.appendChild(this.projectDialog);
 
     }
 
@@ -110,11 +109,11 @@ export default class ModalUI {
 
     }
 
-    openProjectModal(projectListUI) {
+    openProjectModal() {
 
-        this.dialog.classList.add("flex", "flex-column", "gap-10");
-        this.dialog.showModal();
-        this.projectListUI = projectListUI;
+        this.projectDialog.classList.add("flex", "flex-column", "gap-10");
+        this.projectDialog.showModal();
+        // this.projectListUI = projectListUI;
         // form.addEventListener("submit", (event) => { this.handleSubmit });
    
     }
@@ -206,3 +205,5 @@ export default class ModalUI {
     //     this.todoDialog.close();
     // }
 }
+
+export const modalDOM = new ModalDOM();

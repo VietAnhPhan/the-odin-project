@@ -1,6 +1,6 @@
 import './style.css';
 import Project from './modules/project';
-import UI from './modules/ui';
+import MainDOM from './modules/mainDOM';
 
 
 const projects =
@@ -14,4 +14,4 @@ const projects =
         new Project('Retreat Plan')
     ];
 
-const ui = new UI(projects);
+const mainDOM = new MainDOM(projects);
