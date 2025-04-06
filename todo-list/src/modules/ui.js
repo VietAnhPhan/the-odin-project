@@ -5,9 +5,10 @@ import ProjectListUI from "./projectListUI";
 
 export default class UI {
     constructor(projects) {
-        this.projects = projects;
-        this.projectListUI = new ProjectListUI(projects);
-        this.todoListUI = new ToDoListUI(projects[0]);
+        // localStorage.setItem("projects", JSON.stringify(projects));
+        this.projects = JSON.parse(localStorage.getItem("projects"));
+        this.projectListUI = new ProjectListUI(this.projects);
+        this.todoListUI = new ToDoListUI(this.projects[0]);
     }
 
 
