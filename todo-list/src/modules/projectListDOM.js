@@ -40,6 +40,7 @@ class ProjectListDOM {
             const deleteProjectIcon = document.createElement("img");
 
             deleteProjectIcon.setAttribute("src", deleteIcon);
+            li.setAttribute("data-index", projects.indexOf(project));
 
             li.classList.add("project__list-item")
             deleteProjectIcon.classList.add("button__action");
@@ -61,7 +62,8 @@ class ProjectListDOM {
 
             li.addEventListener("click", () => {
                 console.log("bubbling")
-                todoListDOM.render(project);
+                projectManager.setprojectSelected(li.getAttribute("data-index"));
+                todoListDOM.render(project, projects.indexOf(project));
                 // const todoListUI = new TodoListDOM(project);
             });
 

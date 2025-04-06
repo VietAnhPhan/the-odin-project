@@ -2,13 +2,15 @@ import Project from "./project";
 import Todo from "./todo";
 import { format } from "date-fns";
 import { projectListDOM } from "./projectListDOM";
+import { projectManager } from "./projectManager";
+import { todoListDOM } from "./todoListDOM";
 
 class ModalDOM {
     constructor() {
         // this.onAddProject = onAddProject;
         this.projectListUI = null;
         this.todoListUI = null;
-        
+
         this.projectDialog = document.createElement("dialog");
         this.projectTitleSpan = document.createElement("span");
         this.addProjectForm = document.createElement("form");
@@ -29,7 +31,7 @@ class ModalDOM {
         this.todoDescription = document.createElement("textarea");
         this.isTodoPriority = document.createElement("input");
         this.isTodoPriorityLabel = document.createElement("label");
-        this.todoAddBtn = document.createElement("button");
+        this.addTodoBtn = document.createElement("button");
         this.todoEditBtn = document.createElement("button");
         this.closeTodoModalBtn = document.createElement("button");
 
@@ -37,19 +39,19 @@ class ModalDOM {
         this.initProjectModal();
         this.initTodoModal();
     }
-    attachEvents(){
-        this.todoAddBtn.addEventListener("click", (event)=>{
+    attachEvents() {
+        this.addTodoBtn.addEventListener("click", (event) => {
             event.preventDefault();
-        
+
             const newTodo = new Todo(
                 this.todoTitle.value,
                 this.todoDescription.value,
                 this.todoDueDate.value,
                 this.isTodoPriority.checked
-    
+
             );
 
-            this.todoListUI.add(newTodo);
+            todoListDOM.addTodo(newTodo);
             this.todoForm.reset();
             this.todoDialog.close();
         });
@@ -64,9 +66,9 @@ class ModalDOM {
         this.addProjectBtn.textContent = "Create project";
         this.addProjectBtn.type = "button";
         this.closeModalBtn.textContent = "Close";
-      
+
         this.closeModalBtn.addEventListener("click", () => {
-           
+
             this.projectDialog.classList.remove("flex", "flex-column", "gap-10");
             this.projectDialog.close();
         })
@@ -75,13 +77,13 @@ class ModalDOM {
             event.preventDefault();
 
             const newProject = new Project(this.projectTitleInput.value);
-        
+
             projectListDOM.addProject(newProject);
 
             this.projectDialog.classList.remove("flex", "flex-column", "gap-10");
             this.addProjectForm.reset();
             this.projectDialog.close();
-    
+
         });
 
         this.addProjectForm.append(this.projectTitleInput, this.addProjectBtn);
@@ -101,7 +103,7 @@ class ModalDOM {
 
         const priorityDiv = document.createElement("div");
         priorityDiv.append(this.isTodoPriorityLabel, this.isTodoPriority);
-        this.todoForm.append(this.todoTitleLabel, this.todoTitle, this.todoDescriptionLabel, this.todoDescription, this.todoDueDateLabel, this.todoDueDate, priorityDiv, this.todoAddBtn);
+        this.todoForm.append(this.todoTitleLabel, this.todoTitle, this.todoDescriptionLabel, this.todoDescription, this.todoDueDateLabel, this.todoDueDate, priorityDiv, this.addTodoBtn);
 
         this.todoDialog.append(this.todoModalTitle, this.todoForm, this.closeTodoModalBtn);
 
@@ -115,7 +117,7 @@ class ModalDOM {
         this.projectDialog.showModal();
         // this.projectListUI = projectListUI;
         // form.addEventListener("submit", (event) => { this.handleSubmit });
-   
+
     }
 
     openAddTodo(todoListUI) {
@@ -130,7 +132,7 @@ class ModalDOM {
         this.isTodoPriorityLabel.textContent = "Is Priority?";
         this.isTodoPriority.type = "checkbox";
         this.isTodoPriority.value = "yes";
-        this.todoAddBtn.textContent = "Create Todo";
+        this.addTodoBtn.textContent = "Create Todo";
         this.closeTodoModalBtn.textContent = "Close";
         this.todoListUI = todoListUI;
         // this.todoBtn.addEventListener("click", this.addTodo.bind(this, onAddProject));

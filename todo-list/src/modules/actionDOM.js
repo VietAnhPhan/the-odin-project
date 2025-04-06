@@ -7,6 +7,12 @@ class ActionDOM{
         this.addProjectBtn.addEventListener("click", ()=>{
             modalDOM.openProjectModal();
         });
+
+        this.addTodoBtn = document.querySelector(".button__add");
+
+        this.addTodoBtn.addEventListener("click", ()=>{
+            modalDOM.openAddTodo();
+        });
     }
 }
 

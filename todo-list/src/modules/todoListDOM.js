@@ -30,7 +30,7 @@ class TodoListDOM {
         });
     }
 
-    render(project, projectIndex) {
+    render(project) {
         console.log(project);
         this.todoListUL.textContent = "";
         this.projectTitleSpan.textContent = project.title;
@@ -73,7 +73,7 @@ class TodoListDOM {
             
             isCompletedcheckbox.addEventListener("click", (event) => {
                 event.stopPropagation();
-                if (!todoTitleSpan.classList.contains("todo__status_done")) {
+                if (!isCompletedcheckbox.checked) {
     
                     todoTitleSpan.classList.add("todo__status_done");
                     todo.completed = true;
@@ -86,7 +86,7 @@ class TodoListDOM {
     
                 }
                 console.log(li.getAttribute('data-index'))
-                projectManager.setCompleted(projectIndex, li.getAttribute('data-index'));
+                projectManager.setCompleted(li.getAttribute('data-index'));
             });
     
     
@@ -100,6 +100,7 @@ class TodoListDOM {
                     todo.priority = true;
                     prorityStatusImg.setAttribute("src", fillStarButton);
                 }
+                projectManager.setPriority(projectManager.getSelectedProject(), li.getAttribute('data-index'));
             });
     
             // li.addEventListener("click", (event) => {
@@ -258,6 +259,11 @@ class TodoListDOM {
         li.append(checkbox, title, prorityStatus, deleteBtn);
 
         this.todoListUL.appendChild(li);
+    }
+
+    addTodo(todo) {
+        projectManager.addTodo(projectManager.getSelectedProject(), todo);
+        this.render(projectManager.getProjects()[projectManager.getSelectedProject()]);
     }
 }
 
