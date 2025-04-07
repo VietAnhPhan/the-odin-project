@@ -73,7 +73,7 @@ class TodoListDOM {
             
             isCompletedcheckbox.addEventListener("click", (event) => {
                 event.stopPropagation();
-                if (!isCompletedcheckbox.checked) {
+                if (isCompletedcheckbox.checked) {
     
                     todoTitleSpan.classList.add("todo__status_done");
                     todo.completed = true;

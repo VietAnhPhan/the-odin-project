@@ -1,13 +1,14 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    min-width: 320px;
 }
 
 .main-layout {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100vh
 }
 
 header {
@@ -28,10 +29,10 @@ header {
     max-width: 1.5rem;
     vertical-align: middle;
     cursor: pointer;
-   
+
 }
 
-.icon{
+.icon {
     padding-right: 1rem;
 }
 
@@ -53,6 +54,7 @@ header {
 
 button {
     cursor: pointer;
+    max-width: max-content;
 }
 
 .icon__add {
@@ -71,12 +73,14 @@ button {
     box-shadow: 0px 2px 7px 1px #d5d8dc;
     background: white;
     border-radius: 5px;
+    flex-wrap: wrap;
 }
 
 .header__menu-item {
     font-size: 1.3rem;
     text-transform: capitalize;
     margin-bottom: 1.5rem;
+    cursor: pointer;
 }
 
 .project__title,
@@ -102,7 +106,8 @@ nav {
 }
 
 footer {
-    position: absolute;
+    background: #ECEFF1;
+    position: fixed;
     bottom: 0;
     width: 100%;
     border-top: solid 1px #969696b1;
@@ -113,7 +118,7 @@ footer {
 .footer__inner {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    
+
 
 }
 
@@ -128,12 +133,14 @@ footer {
 
 main {
     padding-top: 2rem;
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
+    padding-inline: 2rem;
     background: #f2f3f4;
+
 }
 
 .todo__list {
-    max-width: 70%;
+    max-width: 100%;
 }
 
 .project__list,
@@ -154,17 +161,38 @@ main {
     flex-grow: 1;
 }
 
-.button__close{
-    background:none;
+.button__close {
+    background: none;
     border: none;
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
 }
-dialog{
+
+dialog {
     width: 20%;
 }
 
-.text__captialize{
+.text__captialize {
     text-transform: capitalize;
+}
+
+@media screen and (min-width: 468px) {
+    .main-layout {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .todo__list {
+        max-width: 70%;
+    }
+
+}
+
+@media screen and (max-width: 468px) {
+    main{
+        min-height: calc(100% + 100px);
+    }
 }
