@@ -10,7 +10,7 @@ class ProjectListDOM {
         const projectsStorage = localStorage.getItem("projects");
         this.projects = projectsStorage ? JSON.parse(projectsStorage) : [];
         this.projects= this.projects.map(project => new Project (project.title, project.todos));
-        console.log(this.projects);
+        // console.log(this.projects);
         // localStorage.setItem("projects", JSON.stringify(this.projects));
         this.projectListUL = document.querySelector(".project__list");
         

@@ -32,12 +32,31 @@ class ModalDOM {
         this.isTodoPriority = document.createElement("input");
         this.isTodoPriorityLabel = document.createElement("label");
         this.addTodoBtn = document.createElement("button");
-        this.todoEditBtn = document.createElement("button");
+
         this.closeTodoModalBtn = document.createElement("button");
+
+        // Add Todo Dialog
+        this.editTodoDialog = document.createElement("dialog");
+        this.editTodoModalTitle = document.createElement("h3");
+        this.editTodoForm = document.createElement("form");
+        this.editTodoTitleLabel = document.createElement("label");
+        this.editTodoTitle = document.createElement("input");
+        this.editTodoDescriptionLabel = document.createElement("label");
+        this.editTodoDueDateLabel = document.createElement("label");
+        this.editTodoDueDate = document.createElement("input");
+        this.editTodoDescription = document.createElement("textarea");
+        this.isEditTodoPriority = document.createElement("input");
+        this.isEditTodoPriorityLabel = document.createElement("label");
+        this.editTodoBtn = document.createElement("button");
+        this.closeEditTodoModalBtn = document.createElement("button");
+
+
+
 
         this.attachEvents();
         this.initProjectModal();
         this.initTodoModal();
+        this.initEditTodoModal();
     }
     attachEvents() {
         this.addTodoBtn.addEventListener("click", (event) => {
@@ -55,7 +74,7 @@ class ModalDOM {
             this.todoForm.reset();
             this.todoDialog.close();
         });
-        // this.todoEditBtn = document.createElement("button");
+        // this.editTodoBtn = document.createElement("button");
     }
 
     initProjectModal() {
@@ -111,6 +130,48 @@ class ModalDOM {
 
     }
 
+    initEditTodoModal() {
+        
+        this.closeEditTodoModalBtn.classList.add("button__close");
+        this.closeEditTodoModalBtn.textContent = "Close";
+        this.closeEditTodoModalBtn.addEventListener("click", () => {
+            this.editTodoForm.reset();
+            this.editTodoDialog.close();
+        })
+
+        const priorityDiv = document.createElement("div");
+        priorityDiv.append(this.isEditTodoPriorityLabel, this.isEditTodoPriority);
+        this.editTodoForm.append(this.editTodoTitleLabel, this.editTodoTitle, this.editTodoDescriptionLabel, this.editTodoDescription, this.editTodoDueDateLabel, this.editTodoDueDate, priorityDiv, this.editTodoBtn);
+
+        this.editTodoDialog.append(this.editTodoModalTitle, this.editTodoForm, this.closeEditTodoModalBtn);
+
+        this.editTodoBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            // const selectedTodo = projectManager.getSelectedTodoIndex();
+            // todo.title = this.editTodoTitle.textContent;
+            // todo.description = this.editTodoDescription.textContent;
+            // todo.dueDate = this.editTodoDueDate.value;
+            // todo.priority = this.isEditTodoPriority.checked
+            todoListDOM.editTodo({
+                title: this.editTodoTitle.value,
+                description: this.editTodoDescription.value,
+                dueDate: this.editTodoDueDate.value,
+                priority: this.isEditTodoPriority.checked
+            });
+
+            this.editTodoForm.reset();
+            this.editTodoDialog.close();
+            // console.log(todo);
+
+        });
+
+
+        document.body.appendChild(this.editTodoDialog);
+
+    }
+
+
+
     openProjectModal() {
 
         this.projectDialog.classList.add("flex", "flex-column", "gap-10");
@@ -140,49 +201,51 @@ class ModalDOM {
         this.todoDialog.showModal();
     }
 
-    openEditTodo(args) {
-        // console.log(args);
+    openEditTodo(todo) {
+        // console.log(todo);
         // console.log(format(todo.dueDate, 'yyyy-MM-dd'));
-        this.todoForm.classList.add("flex", "flex-column", "gap-10");
-        this.todoModalTitle.textContent = "Edit Todo";
-        this.todoTitleLabel.textContent = "Title";
-        this.todoDescriptionLabel.textContent = "Description";
-        this.todoDueDateLabel.textContent = "Due date";
-        this.isTodoPriorityLabel.textContent = "Is Priority?";
-        this.todoBtn.textContent = "Save Todo";
+        this.editTodoForm.classList.add("flex", "flex-column", "gap-10");
+        this.editTodoModalTitle.textContent = "Edit Todo";
+        this.editTodoTitleLabel.textContent = "Title";
+        this.editTodoDescriptionLabel.textContent = "Description";
+        this.editTodoDueDateLabel.textContent = "Due date";
+        this.isEditTodoPriorityLabel.textContent = "Is Priority?";
+        this.editTodoBtn.textContent = "Save Todo";
         this.closeTodoModalBtn.textContent = "Close";
 
-        this.todoTitle.type = "text";
-        this.todoDueDate.type = "date";
-        this.isTodoPriority.type = "checkbox";
+        this.editTodoTitle.type = "text";
+        this.editTodoDueDate.type = "date";
+        this.isEditTodoPriority.type = "checkbox";
 
 
-        this.todoTitle.value = args.todo.title;
-        this.todoDescription.textContent = args.todo.description;
-        this.todoDueDate.value = format(args.todo.dueDate, 'yyyy-MM-dd');
-        this.isTodoPriority.checked = args.todo.priority;
+        this.editTodoTitle.value = todo.title;
+        this.editTodoDescription.textContent = todo.description;
+        this.editTodoDueDate.value = format(todo.dueDate, 'yyyy-MM-dd');
+        this.isEditTodoPriority.checked = todo.priority;
+       
+     
         // console.log(fillStarButton);
 
-        const handleTodoBtn = (event) => {
-            event.preventDefault();
+        // const handleTodoBtn = (event) => {
+        //     event.preventDefault();
 
-            args.todo.title = this.todoTitle.value;
-            args.todo.description = this.todoDescription.value;
-            args.todo.dueDate = this.todoDueDate.value;
-            args.todo.priority = this.isTodoPriority.checked;
+        //     args.todo.title = this.todoTitle.value;
+        //     args.todo.description = this.todoDescription.value;
+        //     args.todo.dueDate = this.todoDueDate.value;
+        //     args.todo.priority = this.isTodoPriority.checked;
 
-            args.el.querySelector(".todo__title").textContent = args.todo.title;
-            args.el.querySelector(".todo__priority").src = args.todo.priority ? args.fill_star : args.hollow_star;
+        //     args.el.querySelector(".todo__title").textContent = args.todo.title;
+        //     args.el.querySelector(".todo__priority").src = args.todo.priority ? args.fill_star : args.hollow_star;
 
 
-            this.todoBtn.removeEventListener("click", handleTodoBtn);
-            this.todoForm.reset();
-            this.todoDialog.close();
-        }
+        //     this.todoBtn.removeEventListener("click", handleTodoBtn);
+        //     this.todoForm.reset();
+        //     this.todoDialog.close();
+        // }
 
-        this.todoBtn.addEventListener("click", handleTodoBtn);
+        // this.todoBtn.addEventListener("click", handleTodoBtn);
 
-        this.todoDialog.showModal();
+        this.editTodoDialog.showModal();
     }
 
 

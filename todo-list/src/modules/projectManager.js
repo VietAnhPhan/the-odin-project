@@ -2,6 +2,7 @@ class ProjectManager{
     constructor(){
         this.projects = JSON.parse(localStorage.getItem("projects")) || [];
         this.selectedProjectIndex = 0;
+        this.selectedTodoIndex = 0;
     }
 
 
@@ -47,6 +48,39 @@ class ProjectManager{
     getSelectedProject(){
         return this.selectedProjectIndex;
     }
+
+
+    setTodoSelectedIndex(index){
+        this.selectedTodoIndex = index;
+    }
+
+    getSelectedTodoIndex(){
+        return this.selectedTodoIndex;
+    }
+
+    getSelectedTodo(){
+        return this.projects[this.getSelectedProject()].todos[this.getSelectedTodoIndex()];
+    }
+
+    editTodo(todo){
+        console.log(todo);
+        const selectedTodo = this.getSelectedTodo();
+        selectedTodo.title = todo.title;
+        selectedTodo.description = todo.description;
+        selectedTodo.dueDate = todo.dueDate;
+        selectedTodo.priority = todo.priority;
+        this.save();
+    }
+
+    deleteTodo(todoIndex){
+        const deletedTodoProjects = this.projects[this.selectedProjectIndex].todos.splice(todoIndex, 1);
+        console.log(deletedTodoProjects);
+        this.save();
+    }
+
+    // editTodo(todo){
+        
+    // }
 
 }
 
