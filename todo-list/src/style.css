@@ -52,6 +52,10 @@ header {
     justify-content: space-between;
 }
 
+.project__list-item:hover{
+    background: #d0f58f;
+}
+
 button {
     cursor: pointer;
     max-width: max-content;
@@ -74,6 +78,12 @@ button {
     background: white;
     border-radius: 5px;
     flex-wrap: wrap;
+    transition: 0.5s;
+}
+
+.todo:hover{
+    transform: translateY(-5px);
+    
 }
 
 .header__menu-item {
@@ -81,6 +91,10 @@ button {
     text-transform: capitalize;
     margin-bottom: 1.5rem;
     cursor: pointer;
+}
+
+.header__menu-item:hover{
+    color:#0069e6;
 }
 
 .project__title,

@@ -14,7 +14,7 @@ export default class MainDOM {
         // this.todoListUI = new TodoListDOM(this.projects[0]);
         this.actionDOM = actionDOM;
         this.todoListDOM = todoListDOM;
-        this.todoListDOM.render(this.projects[0], this.projects.indexOf(this.projects[0]));
+        this.todoListDOM.render(this.projects[0]);
     }
 
 

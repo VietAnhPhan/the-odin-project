@@ -82,6 +82,10 @@ class ProjectManager{
         
     // }
 
+    getFirstProject(){
+        return this.projects[0]
+    }
+
 }
 
 export const projectManager = new ProjectManager();

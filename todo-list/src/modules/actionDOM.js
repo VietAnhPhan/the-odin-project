@@ -1,17 +1,44 @@
 import { modalDOM } from "./modalDOM";
+import { projectManager } from "./projectManager";
+import { todoListDOM } from "./todoListDOM";
 
-class ActionDOM{
-    constructor(){
+class ActionDOM {
+    constructor() {
         this.addProjectBtn = document.querySelector(".project__add-btn");
 
-        this.addProjectBtn.addEventListener("click", ()=>{
+        this.addProjectBtn.addEventListener("click", () => {
             modalDOM.openProjectModal();
         });
 
         this.addTodoBtn = document.querySelector(".button__add");
 
-        this.addTodoBtn.addEventListener("click", ()=>{
+        this.addTodoBtn.addEventListener("click", () => {
             modalDOM.openAddTodo();
+        });
+
+        this.importantMenu = document.querySelector("#menu__important");
+
+        this.importantMenu.addEventListener("click", () => {
+            const priorityProject = {
+                title: "Important",
+                todos: []
+            }
+
+            const projects = projectManager.getProjects();
+            projects.forEach(project => {
+                const todos = project.todos.filter(todo => todo.priority == true);
+                todos.forEach(todo => {
+                    priorityProject.todos.push(todo);
+                });
+
+            });
+
+            todoListDOM.render(priorityProject);
+        });
+
+        this.homeMenu = document.querySelector("#menu__home");
+        this.homeMenu.addEventListener("click", ()=>{
+            todoListDOM.render(projectManager.getFirstProject());
         });
     }
 }
