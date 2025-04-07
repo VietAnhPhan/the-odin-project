@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background-color: #F4F5F7;
+    background-color: rgba(51, 144, 255, 0.75);
     position: relative;
 }
 
@@ -25,7 +25,7 @@ header {
 
 .button__action,
 .icon {
-    max-width: 1rem;
+    max-width: 1.5rem;
     vertical-align: middle;
     cursor: pointer;
    
@@ -42,6 +42,13 @@ header {
 .project__list-item {
     cursor: pointer;
     padding-bottom: 1rem;
+    background: #DAF7A6;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 button {
@@ -59,19 +66,22 @@ button {
 .todo {
     cursor: pointer;
     padding: 1rem 2rem;
-    border: solid 1px #969696b1;
+    /* border: solid 1px #969696b1; */
     margin-bottom: 1rem;
+    box-shadow: 0px 2px 7px 1px #d5d8dc;
+    background: white;
+    border-radius: 5px;
 }
 
 .header__menu-item {
-    font-size: 1rem;
+    font-size: 1.3rem;
     text-transform: capitalize;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .project__title,
 .project__heading {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-transform: capitalize;
 }
 
@@ -119,6 +129,7 @@ footer {
 main {
     padding-top: 2rem;
     padding-left: 2rem;
+    background: #f2f3f4;
 }
 
 .todo__list {
@@ -128,6 +139,7 @@ main {
 .project__list,
 .todo__list {
     list-style: none;
+    padding-left: 0;
 }
 
 .gap-10 {
