@@ -210,3 +210,7 @@ dialog {
         min-height: calc(100% + 100px);
     }
 }
+
+.todo__priority_bg_clr{
+    background: rgb(255,110,176);
+}

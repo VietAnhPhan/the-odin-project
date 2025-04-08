@@ -89,16 +89,24 @@ class TodoListDOM {
                 projectManager.setCompleted(li.getAttribute('data-index'));
             });
     
-    
+            if(todo.priority){
+                li.classList.add("todo__priority_bg_clr");
+            }
+            else{
+                li.classList.remove("todo__priority_bg_clr");
+            }
+
             prorityStatusImg.addEventListener("click", (event) => {
                 event.stopPropagation();
                 if (prorityStatusImg.getAttribute("src") == fillStarButton) {
                     todo.priority = false;
                     prorityStatusImg.setAttribute("src", hollowStarButton);
+                    li.classList.remove("todo__priority_bg_clr");
                 }
                 else {
                     todo.priority = true;
                     prorityStatusImg.setAttribute("src", fillStarButton);
+                    li.classList.add("todo__priority_bg_clr");
                 }
                 projectManager.setPriority(projectManager.getSelectedProject(), li.getAttribute('data-index'));
             });
