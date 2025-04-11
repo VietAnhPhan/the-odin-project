@@ -9,10 +9,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  plugins:[
+  plugins: [
     new HtmlWebpackPlugin({
-        template: "./src/template.html",
-      }),
+      template: "./src/template.html",
+    }),
   ],
   module: {
     rules: [

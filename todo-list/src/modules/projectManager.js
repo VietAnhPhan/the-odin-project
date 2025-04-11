@@ -1,91 +1,93 @@
-class ProjectManager{
-    constructor(){
-        this.projects = JSON.parse(localStorage.getItem("projects")) || [];
-        this.selectedProjectIndex = 0;
-        this.selectedTodoIndex = 0;
-    }
+class ProjectManager {
+  constructor() {
+    this.projects = JSON.parse(localStorage.getItem("projects")) || [];
+    this.selectedProjectIndex = 0;
+    this.selectedTodoIndex = 0;
+  }
 
+  getProjects() {
+    return this.projects;
+  }
 
+  addProject(project) {
+    this.projects.push(project);
+    this.save();
+  }
 
-    getProjects(){
-        return this.projects;
-    }
+  deleteProject(project) {
+    this.projects.splice(this.projects.indexOf(project), 1);
+    this.save();
+  }
 
-    addProject(project){
-        this.projects.push(project);
-        this.save();
-    }
+  setCompleted(todoIndex) {
+    this.projects[this.selectedProjectIndex].todos[todoIndex].completed =
+      !this.projects[this.selectedProjectIndex].todos[todoIndex].completed;
+    this.save();
+  }
 
-    deleteProject(project){
-        this.projects.splice(this.projects.indexOf(project), 1);
-        this.save();
-    }
+  setPriority(projectIndex, todoIndex) {
+    this.projects[projectIndex].todos[todoIndex].priority =
+      !this.projects[projectIndex].todos[todoIndex].priority;
+    this.save();
+  }
+  // setPriority
 
-    setCompleted(todoIndex){
-        this.projects[this.selectedProjectIndex].todos[todoIndex].completed = !this.projects[this.selectedProjectIndex].todos[todoIndex].completed;
-        this.save();
-    }
+  save() {
+    localStorage.setItem("projects", JSON.stringify(this.projects));
+  }
 
-    setPriority(projectIndex, todoIndex){
-        this.projects[projectIndex].todos[todoIndex].priority = !this.projects[projectIndex].todos[todoIndex].priority;
-        this.save();
-    }
-    // setPriority
+  addTodo(projectIndex, todo) {
+    this.projects[projectIndex].todos.push(todo);
+    this.save();
+  }
 
-    save(){
-        localStorage.setItem("projects", JSON.stringify(this.projects));
-    }
+  setprojectSelected(index) {
+    this.selectedProjectIndex = index;
+  }
 
-    addTodo(projectIndex, todo){
-        this.projects[projectIndex].todos.push(todo);
-        this.save();
-    }
+  getSelectedProject() {
+    return this.selectedProjectIndex;
+  }
 
-    setprojectSelected(index){
-        this.selectedProjectIndex = index;
-    }
+  setTodoSelectedIndex(index) {
+    this.selectedTodoIndex = index;
+  }
 
-    getSelectedProject(){
-        return this.selectedProjectIndex;
-    }
+  getSelectedTodoIndex() {
+    return this.selectedTodoIndex;
+  }
 
+  getSelectedTodo() {
+    return this.projects[this.getSelectedProject()].todos[
+      this.getSelectedTodoIndex()
+    ];
+  }
 
-    setTodoSelectedIndex(index){
-        this.selectedTodoIndex = index;
-    }
+  editTodo(todo) {
+    console.log(todo);
+    const selectedTodo = this.getSelectedTodo();
+    selectedTodo.title = todo.title;
+    selectedTodo.description = todo.description;
+    selectedTodo.dueDate = todo.dueDate;
+    selectedTodo.priority = todo.priority;
+    this.save();
+  }
 
-    getSelectedTodoIndex(){
-        return this.selectedTodoIndex;
-    }
+  deleteTodo(todoIndex) {
+    const deletedTodoProjects = this.projects[
+      this.selectedProjectIndex
+    ].todos.splice(todoIndex, 1);
+    console.log(deletedTodoProjects);
+    this.save();
+  }
 
-    getSelectedTodo(){
-        return this.projects[this.getSelectedProject()].todos[this.getSelectedTodoIndex()];
-    }
+  // editTodo(todo){
 
-    editTodo(todo){
-        console.log(todo);
-        const selectedTodo = this.getSelectedTodo();
-        selectedTodo.title = todo.title;
-        selectedTodo.description = todo.description;
-        selectedTodo.dueDate = todo.dueDate;
-        selectedTodo.priority = todo.priority;
-        this.save();
-    }
+  // }
 
-    deleteTodo(todoIndex){
-        const deletedTodoProjects = this.projects[this.selectedProjectIndex].todos.splice(todoIndex, 1);
-        console.log(deletedTodoProjects);
-        this.save();
-    }
-
-    // editTodo(todo){
-        
-    // }
-
-    getFirstProject(){
-        return this.projects[0]
-    }
-
+  getFirstProject() {
+    return this.projects[0];
+  }
 }
 
 export const projectManager = new ProjectManager();
