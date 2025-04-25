@@ -20,7 +20,7 @@ _TOP (The Odin Project) where I start learning to become full stack developer. T
 ### Todo List
 ![image](https://github.com/user-attachments/assets/5fabbd90-71fb-48f5-b58a-880135c3bb17)
 
-###Weather App
+### Weather App
 ![image](https://github.com/user-attachments/assets/3d254eaa-2063-4cc4-81e2-857b8c943ae2)
 
 Using App: https://vietanhphan.github.io/top-weather-app/
