@@ -1,5 +1,5 @@
-# TOP
-_TOP (The Odin Project) where I start learning to become full stack developer. Thanksfully!_
+# The Odin Project
+_The Odin Project (TOP) where I start learning to become full stack developer. Thanksfully!_
 ## Intermediate HTML and CSS (2 projects)
 ### Sign-up Form
 ![Sign-up Form](https://github.com/user-attachments/assets/3f1d664e-c928-4232-a953-1d79924bee62)
