@@ -1,4 +1,4 @@
-# The Odin Project
+# The Odin Project Repositories
 _The Odin Project (TOP) where I start learning to become full stack developer. Thanksfully!_
 ## Intermediate HTML and CSS (2 projects)
 ### Sign-up Form
