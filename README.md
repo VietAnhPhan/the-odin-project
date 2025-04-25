@@ -15,15 +15,18 @@ _TOP (The Odin Project) where I start learning to become full stack developer. T
 ![image](https://github.com/user-attachments/assets/b1603727-d85a-4331-8c0b-db109ba450db)
 
 ### Restaurant Page
+Using App: https://vietanhphan.github.io/the-odin-project/
 ![image](https://github.com/user-attachments/assets/8f8eecab-4532-4ecb-a78e-94826fabb129)
 
 ### Todo List
+Using App: https://vietanhphan.github.io/top-todo-list/
 ![image](https://github.com/user-attachments/assets/5fabbd90-71fb-48f5-b58a-880135c3bb17)
 
 ### Weather App
+Using App: https://vietanhphan.github.io/top-weather-app/
 ![image](https://github.com/user-attachments/assets/3d254eaa-2063-4cc4-81e2-857b8c943ae2)
 
-Using App: https://vietanhphan.github.io/top-weather-app/
+
 
 
 ## Credits
