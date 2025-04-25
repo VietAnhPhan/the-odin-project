@@ -20,6 +20,11 @@ _TOP (The Odin Project) where I start learning to become full stack developer. T
 ### Todo List
 ![image](https://github.com/user-attachments/assets/5fabbd90-71fb-48f5-b58a-880135c3bb17)
 
+###Weather App
+![image](https://github.com/user-attachments/assets/3d254eaa-2063-4cc4-81e2-857b8c943ae2)
+
+Using App: https://vietanhphan.github.io/top-weather-app/
+
 
 ## Credits
 Photo by <a href="https://unsplash.com/@haliewestphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Halie West</a> on <a href="https://unsplash.com/photos/green-leaf-plant-in-close-up-photography-25xggax4bSA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
