@@ -1,6 +1,6 @@
 import { LinksList } from "../linkedlists/LinkedList.js";
 
-export class HashMap {
+export class HashSet {
   constructor(loadFactor = 0.75, capacity = 16) {
     this.loadFactor = loadFactor;
     this.capacity = capacity;
@@ -18,7 +18,7 @@ export class HashMap {
     return hashCode % this.capacity;
   }
 
-  set(key, value) {
+  set(key) {
     this.doubleCapacity();
     const index = this.hash(key);
     // console.log(index);
@@ -33,7 +33,7 @@ export class HashMap {
 
     // list.append([key, value]);
     // this.buckets[index].push([key, value]);
-    this.buckets[index].append([key, value]);
+    this.buckets[index].append(key);
     // console.log(this.buckets[index]);
   }
 
@@ -50,8 +50,8 @@ export class HashMap {
     let headList = bucket.getHead();
 
     while (headList) {
-      if (headList.value[0] === key) {
-        return headList.value[1];
+      if (headList.value === key) {
+        return headList.value;
       }
 
       headList = headList.nextNode;
@@ -99,24 +99,7 @@ export class HashMap {
         const array = [];
 
         while (headList) {
-          array.push(headList.value[0]);
-
-          headList = headList.nextNode;
-        }
-        return array;
-      })
-      .flatMap((item) => item);
-  }
-
-  values() {
-    return this.buckets
-      .filter((item) => item)
-      .map((item) => {
-        let headList = item.getHead();
-        const array = [];
-
-        while (headList) {
-          array.push(headList.value[1]);
+          array.push(headList.value);
 
           headList = headList.nextNode;
         }
@@ -154,7 +137,7 @@ export class HashMap {
     let headList = bucket.getHead();
     let index = 0;
     while (headList) {
-      if (headList.value[0] === key) {
+      if (headList.value === key) {
         bucket.removeAt(index);
         return true;
       }
