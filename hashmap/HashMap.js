@@ -88,7 +88,7 @@ export class HashMap {
   }
 
   doubleCapacity() {
-    if (this.loadFactor * this.length() >= 16) this.capacity *= 2;
+    if (this.length() / this.capacity >= this.loadFactor) this.capacity *= 2;
   }
 
   keys() {
