@@ -19,7 +19,7 @@ export class Tree {
     return root;
   }
 
-  prettyPrint(node, prefix = "", isLeft = true) {
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
     }
@@ -36,7 +36,7 @@ export class Tree {
     }
   }
 
-  insertNode(root, value) {
+  insertNode(value, root = this.root) {
     if (root === null) {
       const newNode = new Node(value);
       this.root = newNode;
@@ -56,8 +56,8 @@ export class Tree {
       return;
     }
 
-    if (root.data < value) this.insertNode(root.right, value);
-    if (root.data > value) this.insertNode(root.left, value);
+    if (root.data < value) this.insertNode(value, root.right);
+    if (root.data > value) this.insertNode(value, root.left);
     if (root.data === value) return;
   }
 
@@ -103,13 +103,13 @@ export class Tree {
     return root;
   }
 
-  find(root, value) {
+  find(value, root = this.root) {
     if (root.data === value) {
       return root;
     }
 
-    if (root.data < value) return this.find(root.right, value);
-    if (root.data > value) return this.find(root.left, value);
+    if (root.data < value) return this.find(value, root.right);
+    if (root.data > value) return this.find(value, root.left);
   }
 
   levelOrder(callback) {
@@ -152,7 +152,7 @@ export class Tree {
     callback(root);
   }
 
-  depth(root, value, count = 0) {
+  depth(value, root = this.root, count = 0) {
     if (root === null) {
       return null;
     }
@@ -163,7 +163,72 @@ export class Tree {
 
     count++;
     // console.log(`${count} ${root.data}`);
-    if (value > root.data) return this.depth(root.right, value, count);
-    if (value < root.data) return this.depth(root.left, value, count);
+    if (value > root.data) return this.depth(value, root.right, count);
+    if (value < root.data) return this.depth(value, root.left, count);
+  }
+
+  heightRecursion(root) {
+    if (root === null) {
+      return 0;
+    }
+
+    const left = this.heightRecursion(root.left);
+    const right = this.heightRecursion(root.right);
+
+    if (root.left || root.right) return Math.max(left, right) + 1;
+    if (!root.left && !root.right) return 0;
+  }
+
+  // height(value) {
+  //   let count = 0;
+  //   const node = this.find(this.root, value);
+  //   let left = node.left,
+  //     right = node.right;
+
+  //   while (right) {
+  //     count++;
+  //     right = right.right;
+  //     left = right.left;
+
+  //   }
+
+  //   return count;
+  // }
+
+  isBalancedRec(root) {
+    if (root === null) {
+      return 0;
+    }
+
+    const lHeight = this.isBalancedRec(root.left);
+    const rHeight = this.isBalancedRec(root.right);
+
+    if (lHeight === -1 || rHeight === -1 || Math.abs(lHeight - rHeight) > 1)
+      return -1;
+
+    return Math.max(lHeight, rHeight) + 1;
+    // if (Math.abs(left - right > 1)) return false;
+  }
+
+  isBalanced(root = this.root) {
+    return this.isBalancedRec(root) > 0;
+  }
+
+  storeInorder(root = this.root, array = []) {
+    if (root === null) {
+      return;
+    }
+
+    this.storeInorder(root.left, array);
+    array.push(root.data);
+    this.storeInorder(root.right, array);
+
+    return array;
+  }
+
+  reBalance() {
+    const inOrderArray = this.storeInorder();
+
+    return this.buildTree(inOrderArray, 0, inOrderArray.length - 1);
   }
 }

@@ -67,35 +67,60 @@ array.map((number) => {
 
 mergeSort(uniqueArray, 0, uniqueArray.length - 1);
 
-// console.log(uniqueArray[10]);
-
 const tree = new Tree(uniqueArray, 0, uniqueArray.length - 1);
 
-// tree.buildTree(uniqueArray, 0, uniqueArray.length - 1);
+console.log("================================Balance Tree");
+tree.buildTree(uniqueArray, 0, uniqueArray.length - 1);
+tree.prettyPrint();
 
-tree.insertNode(tree.root, 1000);
-tree.insertNode(tree.root, 2000);
-tree.insertNode(tree.root, 9000);
-tree.insertNode(tree.root, 3000);
+console.log("================================Insert several Nodes");
+tree.insertNode(1000);
+tree.insertNode(2000);
+tree.insertNode(9000);
+tree.insertNode(3000);
+tree.prettyPrint();
 
-// tree.prettyPrint(tree.root);
+console.log("=========================================Delete node of 8");
+tree.deleteItem(tree.root, 8);
+tree.prettyPrint(tree.root);
 
-// tree.deleteItem(tree.root, 8);
-// console.log("========================Delete 8=========================");
-// tree.prettyPrint(tree.root);
-// const node1000 = tree.find(tree.root, 1000);
+console.log(
+  "================================================= Find node value 1000"
+);
+const node1000 = tree.find(1000);
+console.log(node1000);
 
-// console.log(
-//   "========================Find node value 1000========================="
-// );
+console.log("=============================== Print tree by level order");
+tree.levelOrder((node) => {
+  console.log(node.data);
+});
 
-// console.log(node1000);
+console.log("=============================== Print tree by PreOrder");
+tree.preOrder(tree.root, (node) => {
+  console.log(node.data);
+});
 
-// tree.levelOrder((node) => {
-//   console.log(node.data);
-// });
+console.log("=============================== Print tree by postOrder");
+tree.postOrder(tree.root, (node) => {
+  console.log(node.data);
+});
 
-// tree.postOrder(tree.root, (node) => {
-//   console.log(node.data);
-// });
-console.log(tree.depth(tree.root, 3000));
+console.log("=============================== Print tree by InOrder");
+tree.inOrder(tree.root, (node) => {
+  console.log(node.data);
+});
+console.log("=============================== Depth of node 1000");
+console.log(tree.depth(1000));
+
+console.log("=============================== Height of node 67");
+const node = tree.find(67);
+
+console.log(tree.heightRecursion(node));
+
+console.log("================================== Is tree balanced?");
+console.log(tree.isBalanced() ? "Yes" : "No");
+
+console.log("================================== Rebalance Tree");
+const reBalanceTree = tree.reBalance();
+
+tree.prettyPrint(reBalanceTree);
