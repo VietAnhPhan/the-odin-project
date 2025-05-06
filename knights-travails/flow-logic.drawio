@@ -1,9 +1,194 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.15">
   <diagram name="Page-1" id="DPSVQ1uGXiLOt43u3zi9">
-    <mxGraphModel>
+    <mxGraphModel dx="4323" dy="1757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="u51uzEtMC7baKAof4C2t-5" value="Class KnightPosition" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="120" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-6" value="+ field: x, y , prev" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u51uzEtMC7baKAof4C2t-5">
+          <mxGeometry y="26" width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="u51uzEtMC7baKAof4C2t-5">
+          <mxGeometry y="52" width="180" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-8" value="+ method(calNextMoves): return possible next move array" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u51uzEtMC7baKAof4C2t-5">
+          <mxGeometry y="60" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-9" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Solution&lt;/span&gt;&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;To resolve the problem,&amp;nbsp;&lt;/span&gt;&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;- we need to find any &lt;u&gt;possible moves&lt;/u&gt; from the starting square (each square has maximum 8 next squares and minium 4 next squares) then &lt;u&gt;string each begining square&lt;/u&gt; to the next square but in the way reverse (the next one point to the previous one) because we want to reference to the previous one to build the path without this we can figure out how to track back even finding the destination on the road.&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;- Then, because each square will have at least &lt;u&gt;4 next squares and 8 next squares max&lt;/u&gt;, we need to validate each next square to figure out whether it would be a destination square, if the first round (includes next squares) does not match, then repeat the process to find each next squares from previous next squares (it mean the new current squares), but it essentially to validate each level (row) in order to find the shortest path, we don&#39;t want to dig into deeper only a specific square, we need to evenly dig into deeper squares (treat each square like on the specific level/row).&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;- Repeat the process until we find the destination square&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; font-weight: 400;&quot;&gt;- At this point, from the destination square, we can easily find the previous one (starting square), because we define a &lt;i&gt;prev &lt;/i&gt;property of each instance of &lt;/span&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;KnightPosition class. &lt;/b&gt;Thing become easier, we can loop thourgh the way to reach to the origin starting square, where the loop will be terminated because there is null of prev of the origin starting square&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp;const path = [];&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; path.push([destinationPos[0], destinationPos[1]]);&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; while (currentMov) {&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; path.push([currentMov.x, currentMov.y]);&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; currentMov = currentMov.prev;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- Finally we have a path, but it stores the squares in reverse way, so we need to reversly loop thourgh to log in the approriate format to the requirement.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;if (path.length &amp;gt; 0) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; console.log(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; `=&amp;gt; You made it in ${path.length - 1} moves!&amp;nbsp; Here&#39;s your path:`&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; );&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; for (let i = path.length; i &amp;gt; 0; i--) console.log(path[i]);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; return;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="100" width="510" height="770" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-12" value="Class Knight" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-200" y="120" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-13" value="+ field: x, y , prev" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u51uzEtMC7baKAof4C2t-12">
+          <mxGeometry y="26" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="u51uzEtMC7baKAof4C2t-12">
+          <mxGeometry y="52" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-15" value="+ method(knightMoves): receive starting square and destination square, then process to finally find the shortes path" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u51uzEtMC7baKAof4C2t-12">
+          <mxGeometry y="60" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-20" value="Class Helper" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-200" y="270" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-21" value="+ field: boardSize" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u51uzEtMC7baKAof4C2t-20">
+          <mxGeometry y="26" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-22" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="u51uzEtMC7baKAof4C2t-20">
+          <mxGeometry y="52" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-23" value="+ method(isInside): to check whether the square approriately inside the board" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u51uzEtMC7baKAof4C2t-20">
+          <mxGeometry y="60" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-24" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;a href=&quot;https://github.com/VietAnhPhan/the-odin-project/tree/develop/knights-travails&quot;&gt;github sourecode&lt;/a&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-200" y="425" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-44" value="" style="group;direction=east;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="-450" y="790" width="235" height="615" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="275" y="135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="u51uzEtMC7baKAof4C2t-44" source="u51uzEtMC7baKAof4C2t-25" target="u51uzEtMC7baKAof4C2t-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-25" value="(3,3)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry y="305" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-26" value="(5,4)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="75" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-29" value="(4,5)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-31" value="(4,1)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="240" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-32" value="(5,2)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="155" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-33" value="(2,1)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="315" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-34" value="(1,2)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="400" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-35" value="(1,4)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="480" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-36" value="(2,5)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="u51uzEtMC7baKAof4C2t-44">
+          <mxGeometry x="185" y="565" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-45" value="(6,6)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="605" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-46" value="(5,7)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="530" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-47" value="(5,3)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="770" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-63" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-48" target="u51uzEtMC7baKAof4C2t-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-48" target="u51uzEtMC7baKAof4C2t-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-48" target="u51uzEtMC7baKAof4C2t-67">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-48" value="(6,4)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="685" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-49" value="(3,3)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="845" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-70" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-50" target="u51uzEtMC7baKAof4C2t-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-50" target="u51uzEtMC7baKAof4C2t-71">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-50" target="u51uzEtMC7baKAof4C2t-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-50" value="(2,4)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="930" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-51" value="..." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="1010" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-52" value="..." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="1095" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u51uzEtMC7baKAof4C2t-29" target="u51uzEtMC7baKAof4C2t-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-62" value="(4,3)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="90" y="685" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-65" value="..." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="90" y="600" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-67" value="..." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="90" y="780" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-69" value="(4,3)" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="90" y="930" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-71" value="..." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="90" y="860" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-73" value="..." style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="90" y="1010" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u51uzEtMC7baKAof4C2t-77" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Conclusion&lt;/h1&gt;&lt;p&gt;- To optimize the logic of the process, we can skip any prior starting point which have been processed, by declare an array to store any squares will be processed and then check the next square whether exists in the array.&lt;/p&gt;&lt;p&gt;- The feature of the assignment can be extened to to find many possible shortest paths, to achieve that, we need to define a flag or mark for each of square to demonstrate as a current level of its, because we want to limit to proccess only squares that has the same level and the destination square in it, from that only the same shortest paths will be included in result. At the point where we firstly found the shortest path, we should include this path to an array, then continue to process other squares have the same level, then if we found the next shortest path, we can push to the array.&lt;/p&gt;&lt;p&gt;- The time complexity of finding path of Knight Moves will be O(n2) and space complexixty will be O(n2)&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="910" width="540" height="310" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
