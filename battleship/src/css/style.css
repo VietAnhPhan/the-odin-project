@@ -4,7 +4,19 @@
     box-sizing: border-box;
 }
 
+main {
+    display: flex;
+}
+
 .player-board {
+    /* display: grid;
+    grid-template-columns: repeat(10, 2em);
+    grid-template-rows: repeat(10, 2em); */
+    display: flex;
+    /* align-items: end; */
+}
+
+.player-board__battle-ground {
     /* display: grid;
     grid-template-columns: repeat(10, 2em);
     grid-template-rows: repeat(10, 2em); */
@@ -16,9 +28,7 @@ table {
     border-collapse: collapse;
 }
 
-thead {
-    padding-left: 2em;
-}
+thead {}
 
 th {
     width: 32px;
@@ -33,6 +43,28 @@ th {
 
 .square-occupied {
     border: 2px solid #00f;
+    background: rgba(0, 0, 255, .05);
+}
+
+.ship-healthpoint {
+    width: 15px;
+    height: 15px;
+    background: rgba(0, 0, 255, .1);
+}
+
+.ship-get-shot {
+    border: 2px solid red;
+    background: rgba(255, 0, 0, .05);
+}
+
+.ship-healthpoints-length {
+    display: flex;
+    gap: 3px;
+}
+
+.square-get-shot {
+    border: 2px solid darkgray;
+    background: rgba(65, 63, 63, 0.05);
 }
 
 .square-unoccupied {

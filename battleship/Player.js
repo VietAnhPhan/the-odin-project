@@ -31,9 +31,27 @@ export class Player {
     const playerBattleGround = playerboard.querySelector(
       ".player-board__battle-ground"
     );
+    const shipHealthPoints = playerboard.querySelector(
+      ".total-ship-healthpoints"
+    );
 
     const carrierHealthPoints = this.healthPointView(carrier);
-    playerboard.appendChild(carrierHealthPoints);
+    const battleshipHealthPoints = this.healthPointView(battleship);
+    const destroyerHealthPoints = this.healthPointView(destroyer);
+    const patrolHealthPoints = this.healthPointView(patrol);
+    const submarineHealthPoints = this.healthPointView(submarine);
+    const destroyer2HealthPoints = this.healthPointView(destroyer2);
+    const patrol2HealthPoints = this.healthPointView(patrol2);
+
+    shipHealthPoints.append(
+      carrierHealthPoints,
+      battleshipHealthPoints,
+      destroyerHealthPoints,
+      patrolHealthPoints,
+      submarineHealthPoints,
+      destroyer2HealthPoints,
+      patrol2HealthPoints
+    );
 
     let axisY = "<div class='axis-y'>";
 
@@ -98,10 +116,12 @@ export class Player {
   healthPointView(ship) {
     const shipType = ship.type;
     const lengthContainer = document.createElement("div");
+    lengthContainer.classList.add("ship-healthpoints-length");
 
     for (let i = 0; i < ship.length; i++) {
       const square = document.createElement("div");
-      square.classList.add("ship-healthpoints");
+
+      square.classList.add("ship-healthpoint");
       lengthContainer.appendChild(square);
     }
 
