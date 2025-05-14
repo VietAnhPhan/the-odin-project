@@ -52,6 +52,12 @@ th {
     background: rgba(0, 0, 255, .1);
 }
 
+.ship-healthpoint[get-hit=true] {
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 0, 0, .05);
+}
+
 .ship-get-shot {
     border: 2px solid red;
     background: rgba(255, 0, 0, .05);
