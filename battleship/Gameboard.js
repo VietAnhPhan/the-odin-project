@@ -1,5 +1,5 @@
 import { Helper } from "./Helper";
-import { Battleship } from "./ships/Battleship";
+import { Battleship } from "./src/ships/Battleship";
 
 export class Gameboard {
   constructor(n = 10) {

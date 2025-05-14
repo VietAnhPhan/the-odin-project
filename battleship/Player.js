@@ -1,9 +1,9 @@
 import { Gameboard } from "./Gameboard";
-import { Battleship } from "./ships/Battleship";
-import { Carrier } from "./ships/Carrier";
-import { Destroyer } from "./ships/Destroyer";
-import { Patrol } from "./ships/Patrol";
-import { Submarine } from "./ships/Submarine";
+import { Battleship } from "./src/ships/Battleship";
+import { Carrier } from "./src/ships/Carrier";
+import { Destroyer } from "./src/ships/Destroyer";
+import { Patrol } from "./src/ships/Patrol";
+import { Submarine } from "./src/ships/Submarine";
 
 export class Player {
   constructor(role) {

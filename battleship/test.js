@@ -1,11 +1,11 @@
 import { Gameboard } from "./Gameboard";
 import { Helper } from "./Helper";
 import { Ship } from "./Ship";
-import { Battleship } from "./ships/Battleship";
-import { Carrier } from "./ships/Carrier";
-import { Destroyer } from "./ships/Destroyer";
-import { Patrol } from "./ships/Patrol";
-import { Submarine } from "./ships/Submarine";
+import { Battleship } from "./src/ships/Battleship";
+import { Carrier } from "./src/ships/Carrier";
+import { Destroyer } from "./src/ships/Destroyer";
+import { Patrol } from "./src/ships/Patrol";
+import { Submarine } from "./src/ships/Submarine";
 
 // beforeEach(() => {
 //   jest.spyOn(global.Math, "random").mockReturnValue(0.5);
@@ -63,6 +63,12 @@ test("Ship", () => {
 
   expect(carrier.location.length).toBe(5);
 
+  carrier.hit();
+  carrier.hit();
+  carrier.hit();
+  carrier.hit();
+  carrier.hit();
+  expect(carrier.isSunk()).toBeTruthy();
   // carrierLocation.forEach((item, index) => {
   //   expect(item[0]).toBe(5);
   //   expect(item[1]).toBe(5 + index);

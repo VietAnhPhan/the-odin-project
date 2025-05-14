@@ -1,4 +1,4 @@
-import { Ship } from "../Ship";
+import { Ship } from "../../Ship";
 
 export class Submarine extends Ship {
   static type = "submarine";
