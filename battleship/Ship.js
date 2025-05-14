@@ -4,6 +4,16 @@ export class Ship {
     this.hitTimes = hitTimes;
     this.sunk = sunk;
     this._location = [];
+    this._id = this.constructor.type + this.constructor.incrementID();
+  }
+
+  static incrementID() {
+    if (!this.idCounter) this.idCounter = 0;
+    return this.idCounter++;
+  }
+
+  get id() {
+    return this._id;
   }
 
   hit() {

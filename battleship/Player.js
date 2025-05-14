@@ -23,10 +23,11 @@ export class Player {
     gameBoard.placeShip(carrier);
     gameBoard.placeShip(battleship);
     gameBoard.placeShip(destroyer);
-    gameBoard.placeShip(patrol);
     gameBoard.placeShip(submarine);
+    gameBoard.placeShip(patrol);
     gameBoard.placeShip(destroyer2);
     gameBoard.placeShip(patrol2);
+
     const playerboard = document.querySelector(`[data-role="${this.role}"]`);
     const playerBattleGround = playerboard.querySelector(
       ".player-board__battle-ground"
@@ -47,8 +48,8 @@ export class Player {
       carrierHealthPoints,
       battleshipHealthPoints,
       destroyerHealthPoints,
-      patrolHealthPoints,
       submarineHealthPoints,
+      patrolHealthPoints,
       destroyer2HealthPoints,
       patrol2HealthPoints
     );
@@ -91,16 +92,17 @@ export class Player {
         if (!square.ship) {
           boardTableData.classList.add("square", "square-unoccupied");
         }
-        if (this.role === "computer")
-          boardTableData.addEventListener("click", () => {
-            if (square.ship) {
-              square.ship.hit();
-              boardTableData.classList.add("ship-get-shot");
-            }
-            if (!square.ship) {
-              boardTableData.classList.add("square-get-shot");
-            }
-          });
+        // if (this.role === "computer")
+        boardTableData.addEventListener("click", () => {
+          if (square.ship && !square.ship.isSunk()) {
+            square.ship.hit();
+            this.updateHealthPointView(square.ship);
+            boardTableData.classList.add("ship-get-shot");
+          }
+          if (!square.ship) {
+            boardTableData.classList.add("square-get-shot");
+          }
+        });
 
         boardTableRowBattleGround.appendChild(boardTableData);
       });
@@ -122,13 +124,27 @@ export class Player {
       const square = document.createElement("div");
 
       square.classList.add("ship-healthpoint");
+      square.setAttribute("get-hit", false);
+      //   square.setAttribute("ship-id", ship.id);
       lengthContainer.appendChild(square);
     }
 
     const shipContainer = document.createElement("div");
+    shipContainer.setAttribute("ship-type", ship.type);
+    shipContainer.setAttribute("ship-id", ship.id);
 
     shipContainer.append(shipType, lengthContainer);
 
     return shipContainer;
+  }
+
+  updateHealthPointView(ship) {
+    const player = document.querySelector(`[data-role='${this.role}']`);
+    const shipID = player.querySelector(`[ship-id="${ship.id}"]`);
+    const shipHealthPoint = shipID.querySelector("[get-hit='false']");
+
+    // shipHealthPoints.forEach((shipHealthPoint) => {
+    shipHealthPoint.setAttribute("get-hit", true);
+    // });
   }
 }
