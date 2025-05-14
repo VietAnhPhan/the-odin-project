@@ -3,15 +3,16 @@ import { Battleship } from "./ships/Battleship";
 
 export class Gameboard {
   constructor(n = 10) {
-    this.board = [];
+    this._board = [];
     this.size = n;
+    this.initBoard();
   }
 
   initBoard() {
     for (let i = 0; i < this.size; i++) {
-      this.board[i] = [];
+      this._board[i] = [];
       for (let j = 0; j < this.size; j++)
-        this.board[i][j] = {
+        this._board[i][j] = {
           ship: null,
           shot: false,
         };
@@ -28,7 +29,7 @@ export class Gameboard {
 
       if (direction === 0 && start.x + ship.length <= 10) {
         for (let i = 0; i < ship.length; i++) {
-          if (this.board[start.x + i][start.y].ship !== null) {
+          if (this._board[start.x + i][start.y].ship !== null) {
             flag = 1;
             break;
           }
@@ -36,12 +37,12 @@ export class Gameboard {
 
         if (flag === 0)
           for (let i = 0; i < ship.length; i++) {
-            this.board[start.x + i][start.y].ship = ship;
+            this._board[start.x + i][start.y].ship = ship;
             ship.location = { x: start.x + i, y: start.y };
           }
       } else if (direction === 1 && start.y + ship.length <= 10) {
         for (let i = 0; i < ship.length; i++) {
-          if (this.board[start.x][start.y + i].ship !== null) {
+          if (this._board[start.x][start.y + i].ship !== null) {
             flag = 1;
             break;
           }
@@ -49,11 +50,15 @@ export class Gameboard {
 
         if (flag === 0) {
           for (let i = 0; i < ship.length; i++) {
-            this.board[start.x][start.y + i].ship = ship;
+            this._board[start.x][start.y + i].ship = ship;
             ship.location = { x: start.x, y: start.y + i };
           }
         }
       }
     }
+  }
+
+  get board() {
+    return this._board;
   }
 }

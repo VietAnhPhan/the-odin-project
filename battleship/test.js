@@ -76,7 +76,9 @@ test("Gameboard: ", () => {
   const carrier = new Carrier();
   const battleship = new Battleship();
   const destroyer = new Destroyer();
+  const destroyer2 = new Destroyer();
   const patrol = new Patrol();
+  const patrol2 = new Patrol();
   const submarine = new Submarine();
 
   gameboard.placeShip(carrier);
@@ -84,6 +86,9 @@ test("Gameboard: ", () => {
   gameboard.placeShip(destroyer);
   gameboard.placeShip(patrol);
   gameboard.placeShip(submarine);
+  gameboard.placeShip(destroyer2);
+  gameboard.placeShip(patrol2);
+
   const carrierLocation = carrier.location;
   expect(carrierLocation.length).toBe(5);
   expect(battleship.location.length).toBe(4);
@@ -97,6 +102,8 @@ test("Gameboard: ", () => {
     ...patrol.location,
     ...submarine.location,
     ...battleship.location,
+    ...patrol2.location,
+    ...destroyer2.location,
   ];
 
   const uniqueArr = [];
@@ -106,6 +113,8 @@ test("Gameboard: ", () => {
   }
 
   expect(totalArr.length === uniqueArr.length).toBeTruthy;
+
+  expect(gameboard.board.length).toBe(10);
 
   // carrierLocation.forEach((item, index) => {
   //   expect(gameboard.board[item[0]][item[1]].ship).toEqual({
