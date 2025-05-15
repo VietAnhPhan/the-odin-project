@@ -35,4 +35,8 @@ export class Ship {
   get location() {
     return this._location;
   }
+
+  isShot() {
+    return this.hitTimes > 0 ? true : false;
+  }
 }
