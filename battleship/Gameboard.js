@@ -76,7 +76,7 @@ export class Gameboard {
     shotCoord.shot = true;
   }
 
-  renderBoard(player) {
+  renderBoard(player, gameController) {
     const carrier = new Carrier();
     const battleship = new Battleship();
     const destroyer = new Destroyer();
@@ -84,6 +84,14 @@ export class Gameboard {
     const patrol = new Patrol();
     const patrol2 = new Patrol();
     const submarine = new Submarine();
+
+    this._ships.push(carrier);
+    this._ships.push(battleship);
+    this._ships.push(destroyer);
+    this._ships.push(destroyer2);
+    this._ships.push(patrol);
+    this._ships.push(patrol2);
+    this._ships.push(submarine);
 
     this.placeShip(carrier);
     this.placeShip(battleship);
@@ -156,10 +164,17 @@ export class Gameboard {
           boardTableData.classList.add("square", "square-unoccupied");
         }
         // if (this.role === "computer")
+
         boardTableData.addEventListener("click", () => {
-          this.receiveAttack(square);
-          this.updateBoard(boardTableBody.childNodes);
-          this.updateShipStatus(square.ship, player.role);
+          if (!this.areSunk()) {
+            this.receiveAttack(square);
+            this.updateBoard(boardTableBody.childNodes);
+            this.updateShipStatus(square.ship, player.role);
+
+            if (this.areSunk()) {
+              gameController.endGame(player);
+            }
+          }
           // console.log(boardTableBody.childNodes);
           // if (square.ship && !square.ship.isSunk()) {
           //   square.ship.hit();
@@ -233,5 +248,14 @@ export class Gameboard {
 
   get ships() {
     return this._ships;
+  }
+
+  set ships(ship) {
+    this._ships.push(ship);
+  }
+
+  areSunk() {
+    const ships = this._ships.filter((ship) => !ship.isSunk());
+    return ships.length > 0 ? false : true;
   }
 }
