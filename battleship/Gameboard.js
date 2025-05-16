@@ -8,27 +8,34 @@ import { Submarine } from "./src/ships/Submarine";
 export class Gameboard {
   constructor(n = 10) {
     this._board = [];
-    this.size = n;
+    this._size = n;
     this._ships = [];
+    this._squareCoords = [];
     this.initBoard();
   }
 
   initBoard() {
-    for (let i = 0; i < this.size; i++) {
+    for (let i = 0; i < this._size; i++) {
       this._board[i] = [];
-      for (let j = 0; j < this.size; j++)
+      for (let j = 0; j < this._size; j++) {
+        this._squareCoords.push({ x: i, y: j });
         this._board[i][j] = {
           ship: null,
           shot: false,
         };
+      }
     }
+  }
+
+  get squareCoords() {
+    return this._squareCoords;
   }
 
   placeShip(ship) {
     // let ship = new ship();
 
     while (ship.location.length !== ship.length) {
-      let start = Helper.randomCoordination(this.size);
+      let start = Helper.randomCoordination(this._size);
       let direction = Helper.randomDirection();
       let flag = 0;
 
@@ -67,13 +74,18 @@ export class Gameboard {
     return this._board;
   }
 
+  get size() {
+    return this._size;
+  }
+
   receiveAttack(shotCoord) {
     // const boardCoord = this._board[shotCoord.x][shotCoord.y];
-
+    if (shotCoord.shot === true) return false;
     if (shotCoord.ship !== null) {
       shotCoord.ship.hit();
     }
     shotCoord.shot = true;
+    return true;
   }
 
   renderBoard(player, gameController) {
@@ -151,6 +163,7 @@ export class Gameboard {
     boardTable.appendChild(boardTableHead);
 
     const boardTableBody = document.createElement("tbody");
+    boardTableBody.setAttribute("data-role", player.role);
 
     this._board.forEach((row) => {
       const boardTableRowBattleGround = document.createElement("tr");
@@ -163,28 +176,30 @@ export class Gameboard {
         if (!square.ship) {
           boardTableData.classList.add("square", "square-unoccupied");
         }
-        // if (this.role === "computer")
+        if (player.role === "computer")
+          boardTableData.addEventListener("click", () => {
+            if (!this.areSunk() && gameController.isHumanTurn()) {
+              if (!this.receiveAttack(square)) return;
+              this.updateBoard(player.role);
+              this.updateShipStatus(square.ship, player.role);
 
-        boardTableData.addEventListener("click", () => {
-          if (!this.areSunk()) {
-            this.receiveAttack(square);
-            this.updateBoard(boardTableBody.childNodes);
-            this.updateShipStatus(square.ship, player.role);
+              if (this.areSunk()) {
+                gameController.endGame(player);
+                return;
+              }
 
-            if (this.areSunk()) {
-              gameController.endGame(player);
+              gameController.playGame();
             }
-          }
-          // console.log(boardTableBody.childNodes);
-          // if (square.ship && !square.ship.isSunk()) {
-          //   square.ship.hit();
-          //   this.updateShipStatus(square.ship, player.role);
-          //   boardTableData.classList.add("ship-get-shot");
-          // }
-          // if (!square.ship) {
-          //   boardTableData.classList.add("square-get-shot");
-          // }
-        });
+            // console.log(boardTableBody.childNodes);
+            // if (square.ship && !square.ship.isSunk()) {
+            //   square.ship.hit();
+            //   this.updateShipStatus(square.ship, player.role);
+            //   boardTableData.classList.add("ship-get-shot");
+            // }
+            // if (!square.ship) {
+            //   boardTableData.classList.add("square-get-shot");
+            // }
+          });
 
         boardTableRowBattleGround.appendChild(boardTableData);
       });
@@ -231,9 +246,13 @@ export class Gameboard {
     // });
   }
 
-  updateBoard(squareDOMs) {
-    for (let i = 0; i < this.size; i++) {
-      for (let j = 0; j < this.size; j++)
+  updateBoard(player) {
+    const squareDOMs = document.querySelector(
+      `tbody[data-role=${player}]`
+    ).childNodes;
+
+    for (let i = 0; i < this._size; i++) {
+      for (let j = 0; j < this._size; j++)
         if (
           this._board[i][j].ship &&
           this._board[i][j].ship.isShot() &&

@@ -70,7 +70,7 @@ th {
 
 .square-get-shot {
     border: 2px solid darkgray;
-    background: rgba(65, 63, 63, 0.05);
+    background: rgba(65, 63, 63, 0.3);
 }
 
 .square-unoccupied {

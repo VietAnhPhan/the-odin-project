@@ -5,6 +5,7 @@ export class GameController {
   constructor(human, computer) {
     this.humanPlayer = human;
     this.computerPlayer = computer;
+    this._playerTurn = null;
   }
 
   // initPlayers() {
@@ -61,5 +62,20 @@ export class GameController {
     else if (loser.role === this.humanPlayer.role) alert("Computer win!!!");
   }
 
-  isEnd() {}
+  playGame() {
+    this.computerPlayer.attack(this.humanPlayer);
+    this.playerTurn = this.humanPlayer;
+  }
+
+  get playerTurn() {
+    return this._playerTurn;
+  }
+
+  set playerTurn(player) {
+    this._playerTurn = player;
+  }
+
+  isHumanTurn() {
+    return this.playerTurn.role === "human" ? true : false;
+  }
 }

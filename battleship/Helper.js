@@ -10,6 +10,10 @@ export class Helper {
     return Math.floor(Math.random() * 2);
   }
 
+  static getRandomNumber(upperLimit) {
+    return Math.floor(Math.random() * upperLimit);
+  }
+
   static pushUniqueCoord(array, coord) {
     if (array.length === 0) {
       array.push(coord);
@@ -32,6 +36,14 @@ export class Helper {
       }
 
       array.push(coord);
+    }
+  }
+
+  static removeCoordElement(array, coord) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].x === coord.x && array[i].y === coord.y) {
+        array.splice(i, 1);
+      }
     }
   }
 }

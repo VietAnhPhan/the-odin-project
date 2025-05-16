@@ -1,4 +1,5 @@
 import { Gameboard } from "./Gameboard";
+import { Helper } from "./Helper";
 import { Battleship } from "./src/ships/Battleship";
 import { Carrier } from "./src/ships/Carrier";
 import { Destroyer } from "./src/ships/Destroyer";
@@ -8,6 +9,33 @@ import { Submarine } from "./src/ships/Submarine";
 export class Player {
   constructor(role) {
     this.role = role;
+    this._board = null;
+  }
+
+  assignedBoard(board) {
+    this._board = board;
+  }
+
+  get board() {
+    return this._board;
+  }
+
+  attack(opponent) {
+    let squareCoord = null;
+    if (this.role === "computer") {
+      const randomIndex = Helper.getRandomNumber(
+        opponent.board.squareCoords.length
+      );
+      squareCoord = opponent.board.squareCoords[randomIndex];
+      Helper.removeCoordElement(opponent.board.squareCoords, squareCoord);
+    }
+
+    const opponentBoard = opponent.board;
+
+    opponentBoard.receiveAttack(
+      opponentBoard.board[squareCoord.x][squareCoord.y]
+    );
+    opponentBoard.updateBoard(opponent.role);
   }
 
   // startGame(gameBoard) {
