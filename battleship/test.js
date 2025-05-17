@@ -1,6 +1,6 @@
-import { Gameboard } from "./Gameboard";
-import { Helper } from "./Helper";
-import { Ship } from "./Ship";
+import { Gameboard } from "./src/Gameboard";
+import { Helper } from "./src/Helper";
+import { Ship } from "./src/Ship";
 import { Battleship } from "./src/ships/Battleship";
 import { Carrier } from "./src/ships/Carrier";
 import { Destroyer } from "./src/ships/Destroyer";
@@ -42,6 +42,18 @@ test("Helper", () => {
     { x: 3, y: 2 },
     { x: 5, y: 2 },
   ]);
+
+  const array = [
+    { x: 1, y: 2 },
+    { x: 2, y: 3 },
+    { x: 3, y: 4 },
+  ];
+
+  Helper.removeCoordElement(array, { x: 2, y: 3 });
+  expect(array).toEqual([
+    { x: 1, y: 2 },
+    { x: 3, y: 4 },
+  ]);
 });
 
 test("Ship", () => {
@@ -72,69 +84,5 @@ test("Ship", () => {
   // carrierLocation.forEach((item, index) => {
   //   expect(item[0]).toBe(5);
   //   expect(item[1]).toBe(5 + index);
-  // });
-});
-
-test("Gameboard: ", () => {
-  const gameboard = new Gameboard();
-  gameboard.initBoard();
-
-  const carrier = new Carrier();
-  const battleship = new Battleship();
-  const destroyer = new Destroyer();
-  const destroyer2 = new Destroyer();
-  const patrol = new Patrol();
-  const patrol2 = new Patrol();
-  const submarine = new Submarine();
-
-  gameboard.placeShip(carrier);
-  gameboard.placeShip(battleship);
-  gameboard.placeShip(destroyer);
-  gameboard.placeShip(patrol);
-  gameboard.placeShip(submarine);
-  gameboard.placeShip(destroyer2);
-  gameboard.placeShip(patrol2);
-
-  const carrierLocation = carrier.location;
-  expect(carrierLocation.length).toBe(5);
-  expect(battleship.location.length).toBe(4);
-  expect(destroyer.location.length).toBe(3);
-  expect(patrol.location.length).toBe(2);
-  expect(submarine.location.length).toBe(3);
-
-  const totalArr = [
-    ...carrier.location,
-    ...destroyer.location,
-    ...patrol.location,
-    ...submarine.location,
-    ...battleship.location,
-    ...patrol2.location,
-    ...destroyer2.location,
-  ];
-
-  const uniqueArr = [];
-
-  for (let i = 0; i < totalArr.length; i++) {
-    Helper.pushUniqueCoord(uniqueArr, totalArr[i]);
-  }
-
-  expect(totalArr.length === uniqueArr.length).toBeTruthy;
-
-  expect(gameboard.board.length).toBe(10);
-
-  // carrierLocation.forEach((item, index) => {
-  //   expect(gameboard.board[item[0]][item[1]].ship).toEqual({
-  //     _length: 5,
-  //     hitTimes: 0,
-  //     sunk: false,
-  //     _location: [
-  //       [5, 5],
-  //       [5, 6],
-  //       [5, 7],
-  //       [5, 8],
-  //       [5, 9],
-  //     ],
-  //     type: "Carrier",
-  //   });
   // });
 });

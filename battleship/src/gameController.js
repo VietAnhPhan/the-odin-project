@@ -1,5 +1,5 @@
-import { Gameboard } from "../Gameboard";
-import { Player } from "../Player";
+import { Gameboard } from "./Gameboard";
+import { Player } from "./Player";
 
 export class GameController {
   constructor(human, computer) {
