@@ -64,6 +64,12 @@ export class GameController {
 
   playGame() {
     this.computerPlayer.attack(this.humanPlayer);
+
+    if (this.humanPlayer.board.areSunk()) {
+      this.endGame(this.humanPlayer);
+      return;
+    }
+
     this.playerTurn = this.humanPlayer;
   }
 
