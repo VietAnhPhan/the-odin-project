@@ -31,11 +31,11 @@ export class Player {
     }
 
     const opponentBoard = opponent.board;
+    const shotSquare = opponentBoard.board[squareCoord.x][squareCoord.y];
 
-    opponentBoard.receiveAttack(
-      opponentBoard.board[squareCoord.x][squareCoord.y]
-    );
+    opponentBoard.receiveAttack(shotSquare);
     opponentBoard.updateBoard(opponent.role);
+    opponentBoard.updateShipStatus(shotSquare.ship, opponent.role);
   }
 
   // startGame(gameBoard) {
