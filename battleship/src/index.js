@@ -5,7 +5,7 @@ import { Carrier } from "./ships/Carrier";
 import { Destroyer } from "./ships/Destroyer";
 import { Patrol } from "./ships/Patrol";
 import { Submarine } from "./ships/Submarine";
-import { GameController } from "./gameController";
+import { GameController } from "./GameController";
 
 import "./css/style.css";
 import { GameboardUI } from "./ui/GameboardUI";

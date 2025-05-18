@@ -5,7 +5,7 @@
 import { Gameboard } from "./src/Gameboard";
 import { Player } from "./src/Player";
 
-import { GameController } from "./src/gameController";
+import { GameController } from "./src/GameController";
 import { GameboardUI } from "./src/ui/GameboardUI";
 
 test("Computer plays all the squares and human's ships are sunk: ", () => {
