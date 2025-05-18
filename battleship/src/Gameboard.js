@@ -4,7 +4,6 @@ import { Carrier } from "./ships/Carrier";
 import { Destroyer } from "./ships/Destroyer";
 import { Patrol } from "./ships/Patrol";
 import { Submarine } from "./ships/Submarine";
-import { GameboardUI } from "./ui/GameboardUI";
 
 export class Gameboard {
   constructor(player, gameController, n = 10) {
@@ -20,10 +19,6 @@ export class Gameboard {
     this.initBoard();
     this.initShips();
     this.placeShips();
-  }
-
-  get gameboardUI() {
-    return this._gameboardUI;
   }
 
   initBoard() {

@@ -10,19 +10,19 @@ import { GameController } from "./gameController";
 import "./css/style.css";
 import { GameboardUI } from "./ui/GameboardUI";
 
-const humanPlayer = new Player("human");
-const computerPlayer = new Player("computer");
+// const humanPlayer = new Player("human");
+// const computerPlayer = new Player("computer");
 
-const gameController = new GameController(humanPlayer, computerPlayer);
+const gameController = new GameController();
 
-const humanGameBoard = new Gameboard(humanPlayer, gameController);
-const computerGameBoard = new Gameboard(computerPlayer, gameController);
+// const humanGameBoard = new Gameboard(humanPlayer, gameController);
+// const computerGameBoard = new Gameboard(computerPlayer, gameController);
 
-const humanGameBoardUI = new GameboardUI(humanGameBoard);
-const computerGameBoardUI = new GameboardUI(computerGameBoard);
+// const humanGameBoardUI = new GameboardUI(gameController.humanGameBoard);
+// const computerGameBoardUI = new GameboardUI(gameController.computerGameBoard);
 
-humanPlayer.assignedBoard(humanGameBoard, humanGameBoardUI);
-computerPlayer.assignedBoard(computerGameBoard, computerGameBoardUI);
+// humanPlayer.assignedBoard(humanGameBoard, humanGameBoardUI);
+// computerPlayer.assignedBoard(computerGameBoard, computerGameBoardUI);
 
 // humanGameBoard.renderBoard(humanPlayer, gameController);
 // computerGameBoard.renderBoard(computerPlayer, gameController);

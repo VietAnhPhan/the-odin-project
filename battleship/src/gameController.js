@@ -1,31 +1,62 @@
 import { Gameboard } from "./Gameboard";
 import { Helper } from "./Helper";
 import { Player } from "./Player";
+import { GameboardUI } from "./ui/GameboardUI";
 
 export class GameController {
-  constructor(human, computer) {
-    this.humanPlayer = human;
-    this.computerPlayer = computer;
+  constructor() {
+    this.humanPlayer = null;
+    this.computerPlayer = null;
+    this._humanGameBoard = null;
+    this._computerGameBoard = null;
     this._playerTurn = null;
+    this.humanGameBoardUI = null;
+    this.computerGameBoardUI = null;
+
+    this.initPlayers();
+    this.initGameBoardLogic();
+    this.initGameBoardUI();
+    this.assignBoard();
   }
 
-  // initPlayers() {
-  //   const humanGameBoard = this.placeShipsOnBoard();
-  //   const computerGameBoard = this.placeShipsOnBoard();
+  get humanGameBoard() {
+    return this._humanGameBoard;
+  }
 
-  //   this.humanPlayer = {
-  //     player: new Player("human"),
-  //     ships: humanGameBoard.ships,
-  //     gameBoard: humanGameBoard.gameBoard,
-  //   };
+  get computerGameBoard() {
+    return this._computerGameBoard;
+  }
 
-  //   this.computerPlayer = {
-  //     player: new Player("computer"),
-  //     ships: computerGameBoard.ships,
-  //     gameBoard: computerGameBoard.gameBoard,
-  //   };
-  // }
+  set humanGameBoard(board) {
+    this._humanGameBoard = board;
+  }
 
+  set computerGameBoard(board) {
+    this._computerGameBoard = board;
+  }
+
+  initGameBoardUI() {
+    this.humanGameBoardUI = new GameboardUI(this.humanGameBoard);
+    this.computerGameBoardUI = new GameboardUI(this.computerGameBoard);
+  }
+
+  initPlayers() {
+    this.humanPlayer = new Player("human");
+    this.computerPlayer = new Player("computer");
+  }
+
+  initGameBoardLogic() {
+    this.humanGameBoard = new Gameboard(this.humanPlayer, this);
+    this.computerGameBoard = new Gameboard(this.computerPlayer, this);
+  }
+
+  assignBoard() {
+    this.humanPlayer.assignedBoard(this.humanGameBoard, this.humanGameBoardUI);
+    this.computerPlayer.assignedBoard(
+      this.computerGameBoard,
+      this.computerGameBoardUI
+    );
+  }
   // initShip() {
   //   const carrier = new Carrier();
   //   const battleship = new Battleship();
