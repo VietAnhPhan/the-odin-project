@@ -1,4 +1,5 @@
 import { Gameboard } from "./Gameboard";
+import { Helper } from "./Helper";
 import { Player } from "./Player";
 
 export class GameController {
@@ -57,18 +58,37 @@ export class GameController {
   // }
 
   endGame(loser) {
-    console.log(loser);
+    // console.log(loser);
     if (loser.role === this.computerPlayer.role) alert("Human win!!!");
     else if (loser.role === this.humanPlayer.role) alert("Computer win!!!");
   }
 
-  playGame() {
-    this.computerPlayer.attack(this.humanPlayer);
+  isEndGame() {
+    if (
+      this.humanPlayer.gameBoard.areSunk() ||
+      this.computerPlayer.gameBoard.areSunk()
+    )
+      return true;
+    return false;
+  }
 
-    if (this.humanPlayer.board.areSunk()) {
-      this.endGame(this.humanPlayer);
+  showWhoWin() {
+    if (this.humanPlayer.gameBoard.areSunk()) alert("Computer win!!!");
+    else if (this.computerPlayer.gameBoard.areSunk()) alert("Human win!!!");
+  }
+
+  playGame() {
+    if (this.isEndGame()) {
+      this.showWhoWin();
       return;
     }
+
+    this.computerPlayer.attack(this.humanPlayer, this.getComputerShot());
+
+    // if (this.humanPlayer.gameBoard.areSunk()) {
+    //   this.endGame(this.humanPlayer);
+    //   return;
+    // }
 
     this.playerTurn = this.humanPlayer;
   }
@@ -83,5 +103,20 @@ export class GameController {
 
   isHumanTurn() {
     return this.playerTurn.role === "human" ? true : false;
+  }
+
+  getComputerShot() {
+    const randomIndex = Helper.getRandomNumber(
+      this.humanPlayer.gameBoard.squareCoords.length
+    );
+
+    const shotCoord = this.humanPlayer.gameBoard.squareCoords[randomIndex];
+
+    Helper.removeCoordElement(
+      this.humanPlayer.gameBoard.squareCoords,
+      shotCoord
+    );
+
+    return shotCoord;
   }
 }

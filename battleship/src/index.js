@@ -8,19 +8,23 @@ import { Submarine } from "./ships/Submarine";
 import { GameController } from "./gameController";
 
 import "./css/style.css";
+import { GameboardUI } from "./ui/GameboardUI";
 
 const humanPlayer = new Player("human");
 const computerPlayer = new Player("computer");
 
-const humanGameBoard = new Gameboard();
-const computerGameBoard = new Gameboard();
-
-humanPlayer.assignedBoard(humanGameBoard);
-computerPlayer.assignedBoard(computerGameBoard);
-
 const gameController = new GameController(humanPlayer, computerPlayer);
 
-humanGameBoard.renderBoard(humanPlayer, gameController);
-computerGameBoard.renderBoard(computerPlayer, gameController);
+const humanGameBoard = new Gameboard(humanPlayer, gameController);
+const computerGameBoard = new Gameboard(computerPlayer, gameController);
+
+const humanGameBoardUI = new GameboardUI(humanGameBoard);
+const computerGameBoardUI = new GameboardUI(computerGameBoard);
+
+humanPlayer.assignedBoard(humanGameBoard, humanGameBoardUI);
+computerPlayer.assignedBoard(computerGameBoard, computerGameBoardUI);
+
+// humanGameBoard.renderBoard(humanPlayer, gameController);
+// computerGameBoard.renderBoard(computerPlayer, gameController);
 
 gameController.playGame();

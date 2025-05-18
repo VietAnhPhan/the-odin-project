@@ -6,17 +6,7 @@ import { Gameboard } from "./src/Gameboard";
 import { Player } from "./src/Player";
 
 import { GameController } from "./src/gameController";
-
-const fs = require("fs");
-const path = require("path");
-const html = fs.readFileSync(
-  path.resolve(__dirname, "./src/template.html"),
-  "utf8"
-);
-
-beforeEach(() => {
-  document.body.innerHTML = html;
-});
+import { GameboardUI } from "./src/ui/GameboardUI";
 
 test("Computer plays all the squares and human's ships are sunk: ", () => {
   //   const gameboard = new Gameboard();
@@ -91,18 +81,26 @@ test("Computer plays all the squares and human's ships are sunk: ", () => {
   const humanPlayer = new Player("human");
   const computerPlayer = new Player("computer");
 
-  const humanGameBoard = new Gameboard();
-  const computerGameBoard = new Gameboard();
+  const gameController = new GameController(humanPlayer, computerPlayer);
+
+  const humanGameBoard = new Gameboard(humanPlayer, gameController);
+  const computerGameBoard = new Gameboard(computerPlayer, gameController);
+
+  // const humanGameBoardUI = new GameboardUI(humanGameBoard);
+  // const computerGameBoardUI = new GameboardUI(computerGameBoard);
 
   humanPlayer.assignedBoard(humanGameBoard);
   computerPlayer.assignedBoard(computerGameBoard);
 
-  const gameController = new GameController(humanPlayer, computerPlayer);
+  // gameController.playGame();
 
-  humanGameBoard.renderBoard(humanPlayer, gameController);
-  computerGameBoard.renderBoard(computerPlayer, gameController);
+  expect(computerGameBoard.squareCoords.length).toBe(100);
+  expect(humanGameBoard.squareCoords.length).toBe(100);
 
-  for (let i = 0; i < 100; i++) gameController.playGame();
+  for (let i = 0; i < 100; i++) {
+    const shotCoord = gameController.getComputerShot();
+    computerPlayer.attack(humanPlayer, shotCoord);
+  }
 
   expect(humanGameBoard.areSunk()).toBeTruthy();
 });

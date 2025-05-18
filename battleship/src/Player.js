@@ -9,33 +9,41 @@ import { Submarine } from "./ships/Submarine";
 export class Player {
   constructor(role) {
     this.role = role;
-    this._board = null;
+    this._gameBoard = null;
+    this._gameBoardUI = null;
   }
 
-  assignedBoard(board) {
-    this._board = board;
+  assignedBoard(board, boardUI = null) {
+    this._gameBoard = board;
+    this._gameBoardUI = boardUI;
   }
 
-  get board() {
-    return this._board;
+  get gameBoard() {
+    return this._gameBoard;
   }
 
-  attack(opponent) {
-    let squareCoord = null;
-    if (this.role === "computer") {
-      const randomIndex = Helper.getRandomNumber(
-        opponent.board.squareCoords.length
-      );
-      squareCoord = opponent.board.squareCoords[randomIndex];
-      Helper.removeCoordElement(opponent.board.squareCoords, squareCoord);
+  attack(opponent, shotCoord) {
+    // let squareCoord = null;
+
+    // if (this.role === "computer") {
+    //   const randomIndex = Helper.getRandomNumber(
+    //     opponent.gameBoard.squareCoords.length
+    //   );
+    //   squareCoord = opponent.gameBoard.squareCoords[randomIndex];
+    //   Helper.removeCoordElement(opponent.gameBoard.squareCoords, squareCoord);
+    // } else if (this.role === "human") {
+    //   squareCoord = opponent.gameBoard.shotCoord;
+    // }
+
+    const opponentBoard = opponent.gameBoard;
+    const shotSquare = opponentBoard.board[shotCoord.x][shotCoord.y];
+
+    opponentBoard.receiveAttack(shotCoord);
+
+    if (this._gameBoardUI) {
+      this._gameBoardUI.updateBoard(opponent);
+      this._gameBoardUI.updateShipStatus(shotSquare.ship, opponent.role);
     }
-
-    const opponentBoard = opponent.board;
-    const shotSquare = opponentBoard.board[squareCoord.x][squareCoord.y];
-
-    opponentBoard.receiveAttack(shotSquare);
-    opponentBoard.updateBoard(opponent.role);
-    opponentBoard.updateShipStatus(shotSquare.ship, opponent.role);
   }
 
   // startGame(gameBoard) {
