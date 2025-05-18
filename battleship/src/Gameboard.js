@@ -29,6 +29,7 @@ export class Gameboard {
         this._board[i][j] = {
           ship: null,
           shot: false,
+          blankSpace: false,
         };
       }
     }
@@ -48,20 +49,46 @@ export class Gameboard {
 
       if (direction === 0 && start.x + ship.length <= 10) {
         for (let i = 0; i < ship.length; i++) {
-          if (this._board[start.x + i][start.y].ship !== null) {
+          if (
+            this._board[start.x + i][start.y].ship ||
+            this._board[start.x + i][start.y].blankSpace
+          ) {
             flag = 1;
             break;
           }
         }
 
-        if (flag === 0)
+        if (flag === 0) {
           for (let i = 0; i < ship.length; i++) {
             this._board[start.x + i][start.y].ship = ship;
             ship.location = { x: start.x + i, y: start.y };
           }
+
+          ship.location.map((location, index) => {
+            if (index === 0 && location.x - 1 >= 0) {
+              this._board[location.x - 1][location.y].blankSpace = true;
+            }
+
+            if (
+              index === ship.location.length - 1 &&
+              location.x + 1 < this.size
+            ) {
+              this._board[location.x + 1][location.y].blankSpace = true;
+            }
+
+            if (location.y + 1 < this.size)
+              this._board[location.x][location.y + 1].blankSpace = true;
+
+            if (location.y - 1 >= 0)
+              this._board[location.x][location.y - 1].blankSpace = true;
+          });
+        }
       } else if (direction === 1 && start.y + ship.length <= 10) {
         for (let i = 0; i < ship.length; i++) {
-          if (this._board[start.x][start.y + i].ship !== null) {
+          if (
+            this._board[start.x][start.y + i].ship ||
+            this._board[start.x][start.y + i].blankSpace
+          ) {
             flag = 1;
             break;
           }
@@ -72,6 +99,24 @@ export class Gameboard {
             this._board[start.x][start.y + i].ship = ship;
             ship.location = { x: start.x, y: start.y + i };
           }
+
+          ship.location.map((location, index) => {
+            if (index === 0 && location.y - 1 >= 0) {
+              this._board[location.x][location.y - 1].blankSpace = true;
+            }
+
+            if (
+              index === ship.location.length - 1 &&
+              location.y + 1 < this.size
+            ) {
+              this._board[location.x][location.y + 1].blankSpace = true;
+            }
+
+            if (location.x + 1 < this.size)
+              this._board[location.x + 1][location.y].blankSpace = true;
+            if (location.x - 1 >= 0)
+              this._board[location.x - 1][location.y].blankSpace = true;
+          });
         }
       }
     }

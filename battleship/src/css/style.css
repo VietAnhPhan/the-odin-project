@@ -43,7 +43,7 @@ th {
 
 .square-occupied {
     border: 2px solid #00f;
-    background: rgba(0, 0, 255, .05);
+    background: rgba(0, 0, 255, .1);
 }
 
 .ship-healthpoint {
@@ -71,6 +71,10 @@ th {
 .square-get-shot {
     border: 2px solid darkgray;
     background: rgba(65, 63, 63, 0.3);
+}
+
+.square-blank-space {
+    border: 2px solid red !important;
 }
 
 .square-unoccupied {

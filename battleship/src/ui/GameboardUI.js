@@ -6,7 +6,9 @@ export class GameboardUI {
 
   renderStatusView(ships, player) {
     const playerboard = document.querySelector(`[data-role="${player.role}"]`);
+    if (!playerboard) return;
     const shipsStatus = playerboard.querySelector(".ships-status");
+
     // console.log(this.gameboard);
     ships.map((ship) => {
       const shipStatus = this.setShipStatus(ship);
@@ -41,6 +43,9 @@ export class GameboardUI {
     this.renderStatusView(this.gameboard.ships, player);
 
     const playerboard = document.querySelector(`[data-role="${player.role}"]`);
+
+    if (!playerboard) return;
+
     const playerBattleGround = playerboard.querySelector(
       ".player-board__battle-ground"
     );
@@ -84,6 +89,9 @@ export class GameboardUI {
         if (!square.ship) {
           boardTableData.classList.add("square", "square-unoccupied");
         }
+        // if (square.blankSpace)
+        //   boardTableData.classList.add("square-blank-space");
+
         if (player.role === "computer")
           boardTableData.addEventListener("click", () => {
             if (gameController.isEndGame()) {
