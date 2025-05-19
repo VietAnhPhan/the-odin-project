@@ -5,6 +5,15 @@ export class Ship {
     this.sunk = sunk;
     this._location = [];
     this._id = this.constructor.type + this.constructor.incrementID();
+    this._blankSpaces = [];
+  }
+
+  set blankSpaces(blank) {
+    this._blankSpaces.push(blank);
+  }
+
+  get blankSpaces() {
+    return this._blankSpaces;
   }
 
   static incrementID() {

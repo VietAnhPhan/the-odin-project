@@ -64,24 +64,7 @@ export class Gameboard {
             ship.location = { x: start.x + i, y: start.y };
           }
 
-          ship.location.map((location, index) => {
-            if (index === 0 && location.x - 1 >= 0) {
-              this._board[location.x - 1][location.y].blankSpace = true;
-            }
-
-            if (
-              index === ship.location.length - 1 &&
-              location.x + 1 < this.size
-            ) {
-              this._board[location.x + 1][location.y].blankSpace = true;
-            }
-
-            if (location.y + 1 < this.size)
-              this._board[location.x][location.y + 1].blankSpace = true;
-
-            if (location.y - 1 >= 0)
-              this._board[location.x][location.y - 1].blankSpace = true;
-          });
+          this.initBlankSpacesByVerticalShip(ship);
         }
       } else if (direction === 1 && start.y + ship.length <= 10) {
         for (let i = 0; i < ship.length; i++) {
@@ -100,26 +83,59 @@ export class Gameboard {
             ship.location = { x: start.x, y: start.y + i };
           }
 
-          ship.location.map((location, index) => {
-            if (index === 0 && location.y - 1 >= 0) {
-              this._board[location.x][location.y - 1].blankSpace = true;
-            }
-
-            if (
-              index === ship.location.length - 1 &&
-              location.y + 1 < this.size
-            ) {
-              this._board[location.x][location.y + 1].blankSpace = true;
-            }
-
-            if (location.x + 1 < this.size)
-              this._board[location.x + 1][location.y].blankSpace = true;
-            if (location.x - 1 >= 0)
-              this._board[location.x - 1][location.y].blankSpace = true;
-          });
+          this.initBlankSpacesByHorizontalShip(ship);
         }
       }
     }
+  }
+
+  initBlankSpacesByVerticalShip(ship) {
+    ship.location.map((location, index) => {
+      if (index === 0 && location.x - 1 >= 0) {
+        this._board[location.x - 1][location.y].blankSpace = true;
+        ship.blankSpaces = { x: location.x - 1, y: location.y };
+      }
+
+      if (index === ship.location.length - 1 && location.x + 1 < this.size) {
+        this._board[location.x + 1][location.y].blankSpace = true;
+        ship.blankSpaces = { x: location.x + 1, y: location.y };
+      }
+
+      if (location.y + 1 < this.size) {
+        this._board[location.x][location.y + 1].blankSpace = true;
+        ship.blankSpaces = { x: location.x, y: location.y + 1 };
+      }
+
+      if (location.y - 1 >= 0) {
+        this._board[location.x][location.y - 1].blankSpace = true;
+        ship.blankSpaces = { x: location.x, y: location.y - 1 };
+      }
+    });
+    // console.log(ship.blankSpaces);
+  }
+
+  initBlankSpacesByHorizontalShip(ship) {
+    ship.location.map((location, index) => {
+      if (index === 0 && location.y - 1 >= 0) {
+        this._board[location.x][location.y - 1].blankSpace = true;
+        ship.blankSpaces = { x: location.x, y: location.y - 1 };
+      }
+
+      if (index === ship.location.length - 1 && location.y + 1 < this.size) {
+        this._board[location.x][location.y + 1].blankSpace = true;
+        ship.blankSpaces = { x: location.x, y: location.y + 1 };
+      }
+
+      if (location.x + 1 < this.size) {
+        this._board[location.x + 1][location.y].blankSpace = true;
+        ship.blankSpaces = { x: location.x + 1, y: location.y };
+      }
+
+      if (location.x - 1 >= 0) {
+        this._board[location.x - 1][location.y].blankSpace = true;
+        ship.blankSpaces = { x: location.x - 1, y: location.y };
+      }
+    });
   }
 
   get board() {
@@ -143,10 +159,17 @@ export class Gameboard {
     this._shotSquare = this._board[shotCoord.x][shotCoord.y];
 
     const shotSquare = this._board[shotCoord.x][shotCoord.y];
+    const ship = shotSquare.ship;
     // const boardCoord = this._board[shotCoord.x][shotCoord.y];
     if (shotSquare.shot === true && !shotSquare.ship) return;
-    if (shotSquare.ship) {
-      shotSquare.ship.hit();
+    if (ship) {
+      ship.hit();
+      if (ship.isSunk()) {
+        ship.blankSpaces.map((blankSpace) => {
+          // console.log(blankSpace);
+          this.board[blankSpace.x][blankSpace.y].shot = true;
+        });
+      }
     }
 
     shotSquare.shot = true;

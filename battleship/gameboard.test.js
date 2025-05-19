@@ -87,7 +87,7 @@ test("Computer plays all the squares and human's ships are sunk: ", () => {
   console.log(gameController.humanGameBoard.board);
   expect(gameController.computerGameBoard.squareCoords.length).toBe(100);
   expect(gameController.humanGameBoard.squareCoords.length).toBe(100);
-
+  console.log(gameController.humanGameBoard.ships);
   // for (let i = 0; i < 100; i++) {
   //   const shotCoord = gameController.getComputerShot();
   //   computerPlayer.attack(humanPlayer, shotCoord);

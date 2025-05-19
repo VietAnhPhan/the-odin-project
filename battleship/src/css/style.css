@@ -2,10 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
 }
 
 main {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5rem;
+
+}
+
+h1 {
+    text-align: center;
+    margin: 2rem;
 }
 
 .player-board {
@@ -14,6 +24,7 @@ main {
     grid-template-rows: repeat(10, 2em); */
     display: flex;
     /* align-items: end; */
+    gap: 3rem;
 }
 
 .player-board__battle-ground {
@@ -37,8 +48,13 @@ th {
 .square {
     width: 32px;
     height: 32px;
+    cursor: pointer;
 
+}
 
+.square:hover {
+    border: 1px solid green;
+    background: rgba(0, 0, 255, .05);
 }
 
 .square-occupied {

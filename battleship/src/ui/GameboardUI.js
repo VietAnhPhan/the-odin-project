@@ -176,5 +176,16 @@ export class GameboardUI {
         "square-get-shot"
       );
     }
+
+    if (
+      opponentGameBoard.shotSquare.ship &&
+      opponentGameBoard.shotSquare.ship.isSunk()
+    ) {
+      opponentGameBoard.shotSquare.ship.blankSpaces.map((blankSpace) => {
+        squareDOMs[blankSpace.x].childNodes[blankSpace.y].classList.add(
+          "square-get-shot"
+        );
+      });
+    }
   }
 }
