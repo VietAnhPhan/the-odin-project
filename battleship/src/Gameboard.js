@@ -209,7 +209,7 @@ export class Gameboard {
   //   });
   // }
 
-  // renderBoard(player, gameController) {
+  // render(player, gameController) {
   //   // const carrier = new Carrier();
   //   // const battleship = new Battleship();
   //   // const destroyer = new Destroyer();
@@ -284,7 +284,7 @@ export class Gameboard {
   //         boardTableData.addEventListener("click", () => {
   //           if (!this.areSunk() && gameController.isHumanTurn()) {
   //             if (!this.receiveAttack(square)) return;
-  //             this.updateBoard(player.role);
+  //             this.update(player.role);
   //             this.updateShipStatus(square.ship, player.role);
 
   //             if (this.areSunk()) {
@@ -350,7 +350,7 @@ export class Gameboard {
   //   // });
   // }
 
-  // updateBoard(player) {
+  // update(player) {
   //   const squareDOMs = document.querySelector(
   //     `tbody[data-role=${player}]`
   //   ).childNodes;

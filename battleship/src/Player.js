@@ -41,7 +41,7 @@ export class Player {
     opponentBoard.receiveAttack(shotCoord);
 
     if (this._gameBoardUI) {
-      this._gameBoardUI.updateBoard(opponent);
+      this._gameBoardUI.update(opponent);
       this._gameBoardUI.updateShipStatus(shotSquare.ship, opponent.role);
     }
   }

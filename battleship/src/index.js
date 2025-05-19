@@ -24,7 +24,7 @@ const gameController = new GameController();
 // humanPlayer.assignedBoard(humanGameBoard, humanGameBoardUI);
 // computerPlayer.assignedBoard(computerGameBoard, computerGameBoardUI);
 
-// humanGameBoard.renderBoard(humanPlayer, gameController);
-// computerGameBoard.renderBoard(computerPlayer, gameController);
+// humanGameBoard.render(humanPlayer, gameController);
+// computerGameBoard.render(computerPlayer, gameController);
 
 gameController.playGame();

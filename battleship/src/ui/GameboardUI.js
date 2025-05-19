@@ -1,7 +1,7 @@
 export class GameboardUI {
   constructor(gameboard) {
     this.gameboard = gameboard;
-    this.renderBoard(this.gameboard.player, this.gameboard.gameController);
+    this.render(this.gameboard.player, this.gameboard.gameController);
   }
 
   renderStatusView(ships, player) {
@@ -39,7 +39,7 @@ export class GameboardUI {
     return shipStatus;
   }
 
-  renderBoard(player, gameController) {
+  render(player, gameController) {
     this.renderStatusView(this.gameboard.ships, player);
 
     const playerboard = document.querySelector(`[data-role="${player.role}"]`);
@@ -110,7 +110,7 @@ export class GameboardUI {
               player.attack(gameController.computerPlayer, { x: x, y: y });
               //   console.log(x, y);
               //   if (!player.board.receiveAttack({ x: x, y: y })) return;
-              //   this.updateBoard(player.role);
+              //   this.update(player.role);
               //   this.updateShipStatus(square.ship, player.role);
               //   if (player.board.areSunk()) {
               //     gameController.endGame(player);
@@ -155,7 +155,7 @@ export class GameboardUI {
     // });
   }
 
-  updateBoard(player) {
+  update(player) {
     const squareDOMs = document.querySelector(
       `tbody[data-role=${player.role}]`
     ).childNodes;
